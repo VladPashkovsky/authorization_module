@@ -1,17 +1,11 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const { login, register, current } = require('../controllers/users')
 
-/* GET users listing. */
-router.post('/login', function(req, res, next) {
-  res.send('LOGIN');
-});
+router.post('/login', login)
 
-router.post('/register', function(req, res, next) {
-  res.send('REGISTER');
-});
+router.post('/register', register)
 
-router.post('/current', function(req, res, next) {
-  res.send('CURRENT');
-});
+router.get('/current', current)
 
-module.exports = router;
+module.exports = router
