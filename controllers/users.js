@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken')
 const login = async (reg, res) => {
   const { email, password } = reg.body
 
-  if (!email && !password) {
+  if (!email || !password) {
     return res.status(400).json({ message: 'Input required fields, please' })
   }
 
   const user = await prisma.user.findFirst({
-    where: { email: email },
+    where: { email },
   })
 
   const isPasswordCorrect = user && (await bcrypt.compare(password, user.password))
@@ -32,34 +32,63 @@ const login = async (reg, res) => {
 
 
 const register = async (reg, res) => {
-  const {name, email, password} = reg.body()
+  const { name, email, password } = reg.body
 
-  if (!name && !email && !password) {
-    return res.send(400).json({message: 'Input required fields, please'})
+  // const registeredUserByName = await prisma.user.findFirst({
+  //   where: { name },
+  // })
+  //
+  // const registeredUserByEmail = await prisma.user.findFirst({
+  //   where: { email },
+  // })
+  //
+  // if (!name || !email || !password) {
+  //   return res.status(400).json({ message: 'Input required fields, please' })
+  // } else if (registeredUserByName) {
+  //   return res.status(400).json({ message: 'User with this name already exists' })
+  // } else if (registeredUserByEmail) {
+  //   return res.status(400).json({ message: 'User with this email already exists' })
+  // }
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: 'Input required fields, please' })
   }
 
   const registeredUserByName = await prisma.user.findFirst({
-    where: {name: name}
+    where: { name },
   })
 
-  if (!registeredUserByName) {
-    return res.status(400).json({message: 'User with this name already exists'})
+  if (registeredUserByName) {
+    return res.status(400).json({ message: 'User with this name already exists' })
   }
 
   const registeredUserByEmail = await prisma.user.findFirst({
-    where: {email: email}
+    where: { email },
   })
 
-  if (!registeredUserByEmail) {
-    return res.status(400).json({message: 'User with this email already exists'})
+  if (registeredUserByEmail) {
+    return res.status(400).json({ message: 'User with this email already exists' })
   }
 
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(password, salt)
 
   const user = await prisma.user.create({
-    data: {name, email, hashedPassword}
+    data: { name, email, password: hashedPassword },
   })
+
+  const secret = process.env.JWT_SECRET
+
+  if (user && secret) {
+    res.status(201).json({
+      id: user.id,
+      email: user.email,
+      name,
+      token: jwt.sign({ id: user.id }, secret, { expiresIn: '30d' }),
+    })
+  } else {
+    return res.status(400).json({})
+  }
 }
 
 
