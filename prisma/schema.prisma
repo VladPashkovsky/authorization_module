@@ -15,15 +15,16 @@ model User {
     email           String  @unique
     password        String
     name            String
-    createdEmployee Employee[]
+    createdProduct Water[]
 }
 
-model Employee {
+model Water {
     id          String @id @default(uuid())
-    firstName   String
-    lastName    String
-    age         String
-    address     String
+    brand       String
+    description String
+    details     String
+    price       String
+    imageUrl    String
     user        User @relation(fields: [userId], references: [id])
     userId      String
 }
