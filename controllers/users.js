@@ -25,11 +25,11 @@ const login = async (reg, res, next) => {
         token: jwt.sign({ id: user.id }, secret, { expiresIn: '30d' }),
       })
     } else if (!user) {
-      return res.status(400).json({ message: 'Wrong email' })
+      return res.status(500).json({ message: 'Wrong email' })
     } else if (!isPasswordCorrect) {
-      return res.status(400).json({ message: 'Wrong password' })
+      return res.status(500).json({ message: 'Wrong password' })
     } else {
-      return res.status(400).json({ message: 'Wrong login or password' })
+      return res.status(500).json({ message: 'Wrong login or password' })
     }
   } catch (e) {
     next(e)
