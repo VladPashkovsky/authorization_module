@@ -16,7 +16,6 @@ app.use(cookieParser())
 
 app.use('/api/user', require('./routes/users'))
 app.use('/api/water', require('./routes/waters'))
-// app.use('/api/employees', require("./routes/employees"));
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)
