@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {FC} from 'react'
 import Layout from '../../components/layout/Layout'
 
-const SignUp = () => {
+const SignUp: FC = () => {
   return (
     <Layout>
         <h1>Sing Up</h1>
