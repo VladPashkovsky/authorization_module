@@ -1,9 +1,10 @@
 export const Paths = {
-  home: '/',
+  login: '/',
+  signup: '/signup',
+  home: '/home',
   waterAdd: '/water/add',
   waterEdit: '/water/edit',
   water: '/water',
   status: '/status',
-  signup: '/signup'
 } as const
 
