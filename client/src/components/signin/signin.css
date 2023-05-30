@@ -10,11 +10,17 @@
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
-    background: #cfd1e1
+    /*background: #cfd1e1;*/
+    background-image: url("./login-wallNew.webp");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
     /*display: flex;*/
     /*justify-content: center;*/
     /*align-items: center;*/
 }
+
+
 
 .container .box {
     position: relative;

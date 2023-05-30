@@ -5,7 +5,7 @@ const SignIn = () => {
   return (
     <div className='container'>
       <div className='box'>
-        <div className='cover'></div>
+        {/*<div className='cover'></div>*/}
         <div className='shadow'></div>
         <div className='content'>
           <div className='form'>
