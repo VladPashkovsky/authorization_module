@@ -14,7 +14,7 @@ const HeaderTransparent = () => {
         </ul>
       </nav>
       <section className='sec1'></section>
-      <section className='sec2'></section>
+      {/*<section className='sec2'></section>*/}
     </div>
   )
 }

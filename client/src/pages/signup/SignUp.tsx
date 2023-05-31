@@ -1,11 +1,9 @@
 import React, {FC} from 'react'
-import Layout from '../../components/layout/Layout'
+import Registration from '../../components/registration/Registration'
 
 const SignUp: FC = () => {
   return (
-    <Layout>
-        <h1>Sing Up</h1>
-    </Layout>
+        <Registration />
   )
 }
 

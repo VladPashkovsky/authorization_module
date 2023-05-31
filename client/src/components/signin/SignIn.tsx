@@ -13,7 +13,7 @@ const SignIn = () => {
             <h2>Sign in</h2>
             <div className='inputBox'>
               <input type='text' required />
-              <i className='fa-solid fa-user'></i>
+              <i className="fa-solid fa-square-envelope"></i>
               <span>Email</span>
             </div>
             <div className='inputBox'>

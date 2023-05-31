@@ -11,7 +11,7 @@ type Props = {
 const Layout: FC<Props> = ({ children }) => {
   return (
     <>
-      <HeaderTransparent/>
+
 
     </>
     // <div className='main'>

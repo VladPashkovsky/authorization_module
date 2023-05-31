@@ -8,8 +8,8 @@ section.sec1 {
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
-    background: url("./bubbles2.webp");
-    background-size: cover;
+    /*background: url("./bubbles2.webp");*/
+    /*background-size: cover;*/
 }
 
 nav {
@@ -29,10 +29,12 @@ nav .brand {
     line-height: 70px;
 }
 
+
 nav .brand h2 {
     margin: 0;
     padding: 0;
     color: white;
+    cursor: pointer;
 }
 
 nav ul {
