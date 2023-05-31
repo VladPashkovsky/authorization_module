@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { FC } from 'react'
+import {Link} from 'react-router-dom'
+import { Paths } from '../../paths'
 import './headerTransparent.css'
 
-const HeaderTransparent = () => {
+const HeaderTransparent: FC = () => {
   return (
     <div className='container_header'>
       <nav>
         <div className='brand'>
-          <h2>Water Database</h2>
+          <Link to={Paths.home} style={{textDecoration: 'none'}}>
+            <h2>Water Database</h2>
+          </Link>
         </div>
         <ul>
-          <li> <a href='#'>Something</a> </li>
-          <li> <a href='#'>Logout</a> </li>
+          <Link to={Paths.login} style={{textDecoration: 'none'}}>
+            <li> <a href='#'>Something</a> </li>
+          </Link>
+          <Link to={Paths.login} style={{textDecoration: 'none'}}>
+            <li> <a href='#'>Logout</a> </li>
+          </Link>
         </ul>
       </nav>
       <section className='sec1'></section>
