@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
-import './layout.css'
+import './layoutBasic.css'
 import HeaderTransparent from '../header_transparent/HeaderTransparent'
 
 type Props = {
   children: React.ReactNode
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const LayoutBasic: FC<Props> = ({ children }) => {
   return (
     <div className='container_layout'>
       <HeaderTransparent />
@@ -15,4 +15,4 @@ const Layout: FC<Props> = ({ children }) => {
   )
 }
 
-export default Layout
+export default LayoutBasic

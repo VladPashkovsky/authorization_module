@@ -1,9 +1,12 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import Registration from '../../components/registration/Registration'
+import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 
 const SignUp: FC = () => {
   return (
-        <Registration />
+    <LayoutEnter>
+      <Registration />
+    </LayoutEnter>
   )
 }
 
