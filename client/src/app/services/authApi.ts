@@ -18,5 +18,6 @@ export const authApi = api.injectEndpoints({
   }),
 })
 
-// export const { useLoginMutation, useRegisterMutation, useCurrentQuery } = authApi
+// @ts-ignore
+export const { useLoginMutation, useRegisterMutation, useCurrentQuery } = authApi
 export const { endpoints: { login, register, current } } = authApi

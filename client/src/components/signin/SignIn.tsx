@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEventHandler } from 'react'
 import './signin.css'
 
 interface SingInProps {
@@ -6,10 +6,11 @@ interface SingInProps {
   valuePass: string,
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onChangePass: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  linkTo: string | undefined
+  linkTo: string | undefined,
+  onClick: MouseEventHandler | undefined;
 }
 
-const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChangePass, linkTo }) => {
+const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChangePass, linkTo, onClick }) => {
   return (
     <div className='container'>
       <div className='box'>
@@ -34,7 +35,7 @@ const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChang
               <a href={linkTo}> <i className='fa-solid fa-user-plus'></i> Sing Up</a>
             </div>
             <div className='inputBox'>
-              <input type='submit' value='Sing In' />
+              <input type='submit' value='Sing In' onClick={onClick} />
             </div>
           </div>
         </div>
