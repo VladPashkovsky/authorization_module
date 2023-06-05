@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 import './signin.css'
 
 interface SingInProps {
@@ -7,7 +7,7 @@ interface SingInProps {
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onChangePass: (e: React.ChangeEvent<HTMLInputElement>) => void,
   linkTo: string | undefined,
-  onClick: MouseEventHandler | undefined;
+  onClick: (data: any) => void
 }
 
 const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChangePass, linkTo, onClick }) => {

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
-import { UserData, useLoginMutation, useRegisterMutation, useCurrentQuery } from '../../app/services/authApi'
+import { UserData, useLoginMutation} from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 
 const Login: FC = () => {

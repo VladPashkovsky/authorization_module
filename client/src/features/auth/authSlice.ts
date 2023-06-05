@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
 import { createSlice } from '@reduxjs/toolkit'
-import { authApi } from '../../app/services/authApi'
+import { apiAuth } from '../../app/services/api'
 import { RootState } from '../../app/store'
 
 interface AuthState {
@@ -21,15 +21,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+      .addMatcher(apiAuth.endpoints.login.matchFulfilled, (state, action) => {
         state.user = action.payload
         state.isAuth = true
       })
-      .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+      .addMatcher(apiAuth.endpoints.register.matchFulfilled, (state, action) => {
         state.user = action.payload
         state.isAuth = true
       })
-      .addMatcher(authApi.endpoints.current.matchFulfilled, (state, action) => {
+      .addMatcher(apiAuth.endpoints.current.matchFulfilled, (state, action) => {
         state.user = action.payload
         state.isAuth = true
       })
