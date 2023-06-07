@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC, lazy, useState, Suspense } from 'react'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
 import { UserData, useLoginMutation} from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
-import Notification from '../../components/notification/Notification'
+import NotificationEnter from '../../components/notificationEnter/NotificationEnter'
+
 
 const Login: FC = () => {
   const [inputEmailValue, setInputEmailValue] = useState('')
@@ -23,7 +24,7 @@ const Login: FC = () => {
 
   return (
     <LayoutEnter>
-      <Notification  />
+      <NotificationEnter  />
       <SignIn
         valueEmail={inputEmailValue}
         onChangeEmail={(event) => setInputEmailValue(event.target.value)}
