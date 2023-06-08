@@ -1,5 +1,5 @@
 #notificationEnter_container {
-    /*display: none;*/
+    /*display: flex;*/
     position: relative;
     transition: 0.2s;
     animation: myAnimOpen 1.5s ease 1s 1 normal forwards;

@@ -1,10 +1,11 @@
-import React, { FC, lazy, useState, Suspense } from 'react'
+import React, { FC, lazy, useState, Suspense, useEffect } from 'react'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
 import { UserData, useLoginMutation} from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
-import NotificationEnter from '../../components/notificationEnter/NotificationEnter'
+import { Button,  notification } from 'antd';
+import type { NotificationPlacement } from 'antd/es/notification/interface';
 
 
 const Login: FC = () => {
@@ -12,6 +13,28 @@ const Login: FC = () => {
   const [inputPassValue, setInputPassValue] = useState('')
   const [error, setError] = useState('')
   const [sendLoginUser, loginUserResult] = useLoginMutation()
+
+  const [api, contextHolder] = notification.useNotification()
+
+  useEffect(() => {
+    const openNotification = (placement: NotificationPlacement) => {
+      api.open({
+        message: 'Notification Title',
+        description:
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        placement: 'topLeft',
+        className: 'custom-class',
+        style: {
+          animationDelay: '2s',
+          width: 300,
+          height: 200,
+          borderRadius: 10,
+        },
+      });
+    };
+    openNotification('topLeft')
+  }, [])
+
 
   const sendLoginData = async (data: UserData) => {
     try {
@@ -24,7 +47,10 @@ const Login: FC = () => {
 
   return (
     <LayoutEnter>
-      <NotificationEnter  />
+      {contextHolder}
+      {/*<Button type="primary" onClick={openNotification}>*/}
+      {/*  Open the notification box*/}
+      {/*</Button>*/}
       <SignIn
         valueEmail={inputEmailValue}
         onChangeEmail={(event) => setInputEmailValue(event.target.value)}

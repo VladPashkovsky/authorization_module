@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 import Registration from '../../components/registration/Registration'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
-import NotificationEnter from '../../components/notificationEnter/NotificationEnter'
 
 const SignUp: FC = () => {
   const [inputNameValue, setInputNameValue] = useState('')
@@ -20,7 +19,6 @@ const SignUp: FC = () => {
         onChangePass={(event) => setInputPassValue(event.target.value)}
         linkTo={Paths.login}
       />
-      <NotificationEnter  />
     </LayoutEnter>
   )
 }
