@@ -7,12 +7,13 @@ export const store = configureStore({
     authReducer,
     [apiAuth.reducerPath]: apiAuth.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(apiAuth.middleware),
 })
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
   RootState,
   unknown,
   Action<string>>;

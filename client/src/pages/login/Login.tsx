@@ -6,6 +6,7 @@ import { UserData, useLoginMutation} from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 import { Button,  notification } from 'antd';
 import type { NotificationPlacement } from 'antd/es/notification/interface';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage'
 
 
 const Login: FC = () => {
@@ -22,7 +23,7 @@ const Login: FC = () => {
         message: 'Notification:',
         description:` 
           Sign in or Sign up as a new user.
-          Email: admin@admin.ru
+          Email: admin@admin.com
           Password: 123456789`,
         placement: 'topLeft',
         className: 'custom-class',
@@ -64,6 +65,7 @@ const Login: FC = () => {
         linkTo={Paths.signup}
         onClick={sendLoginData}
       />
+      <ErrorMessage message={error}/>
     </LayoutEnter>
   )
 }

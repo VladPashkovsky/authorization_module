@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:8000/api',
 })
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 3 })
+const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 })
 
 export const apiAuth = createApi({
   reducerPath: 'apiAuth',

@@ -31,7 +31,7 @@ const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChang
               <span>Password</span>
             </div>
             <div className='links'>
-              <a href={linkTo}> <i className='fa-solid fa-question'></i> Forgot Password</a>
+              <a href='#'> <i className='fa-solid fa-question'></i> Forgot Password</a>
               <a href={linkTo}> <i className='fa-solid fa-user-plus'></i> Sing Up</a>
             </div>
             <div className='inputBox'>
