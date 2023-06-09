@@ -19,15 +19,20 @@ const Login: FC = () => {
   useEffect(() => {
     const openNotification = (placement: NotificationPlacement) => {
       api.open({
-        message: 'Notification Title',
-        description:
-          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        message: 'Notification:',
+        description:` 
+          Sign in or Sign up as a new user.
+          Email: admin@admin.ru
+          Password: 123456789`,
         placement: 'topLeft',
         className: 'custom-class',
+        duration: 20,
         style: {
-          animationDelay: '2s',
+          animationDelay: '1.5s',
           width: 300,
-          height: 200,
+          textAlign: 'center',
+          whiteSpace: 'pre-line',
+          fontWeight: 'bold',
           borderRadius: 10,
         },
       });
