@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/dist/query/re
 import { RootState } from '../store'
 import { User } from '@prisma/client'
 
+export type UserDataLogin = Omit<User, 'id' | 'name'>
 export type UserData = Omit<User, 'id'>
 type ResponseLoginData = User & { token: string }
 
@@ -9,7 +10,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:8000/api',
 })
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 2 })
+const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 })
 
 export const apiAuth = createApi({
   reducerPath: 'apiAuth',
@@ -17,8 +18,8 @@ export const apiAuth = createApi({
   tagTypes: ['Auth'],
   refetchOnMountOrArgChange: true,
   endpoints: (build) => ({
-    login: build.mutation<ResponseLoginData, UserData>({
-      query: (userData) => ({ url: '/user/login', method: 'POST', body: userData }),
+    login: build.mutation<ResponseLoginData, UserDataLogin>({
+      query: (userDataLogin) => ({ url: '/user/login', method: 'POST', body: userDataLogin }),
       invalidatesTags: ['Auth'],
     }),
     register: build.mutation<ResponseLoginData, UserData>({

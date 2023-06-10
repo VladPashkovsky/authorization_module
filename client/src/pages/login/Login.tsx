@@ -2,7 +2,7 @@ import React, { FC, lazy, useState, Suspense, useEffect } from 'react'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
-import { UserData, useLoginMutation} from '../../app/services/api'
+import { UserData, useLoginMutation, UserDataLogin } from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 import { Button,  notification } from 'antd';
 import type { NotificationPlacement } from 'antd/es/notification/interface';
@@ -41,15 +41,22 @@ const Login: FC = () => {
     openNotification('topLeft')
   }, [])
 
+  const currentUserData = {
+    email: inputEmailValue,
+    password: inputPassValue,
+}
 
-  const sendLoginData = async (data: UserData) => {
+  const sendLoginData = async (data: UserDataLogin) => {
     try {
-      await sendLoginUser(data).unwrap()
+      await sendLoginUser(currentUserData).unwrap()
     } catch (err) {
       const ifError = isErrorWithMessage(err)
       ifError ? setError(err.data.message) : setError('Unknown error')
     }
   }
+
+  console.log(error)
+
 
   return (
     <LayoutEnter>
