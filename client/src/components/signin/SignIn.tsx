@@ -4,20 +4,21 @@ import './signin.css'
 interface SingInProps {
   valueEmail: string,
   valuePass: string,
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void,
   onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onChangePass: (e: React.ChangeEvent<HTMLInputElement>) => void,
   linkTo: string | undefined,
   onClick: (data: any) => void
 }
 
-const SignIn: FC<SingInProps> = ({ valueEmail, onChangeEmail, valuePass, onChangePass, linkTo, onClick }) => {
+const SignIn: FC<SingInProps> = ({ onKeyDown, valueEmail, onChangeEmail, valuePass, onChangePass, linkTo, onClick }) => {
   return (
     <div className='container'>
       <div className='box'>
         {/*<div className='cover'></div>*/}
         <div className='shadow'></div>
         <div className='content'>
-          <div className='form'>
+          <div className='form' onKeyDown={onKeyDown}>
             <h3 className='logo'><i className='fa-solid fa-key'></i></h3>
             <h2>Sign in</h2>
             <div className='inputBox'>

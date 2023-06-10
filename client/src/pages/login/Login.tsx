@@ -1,10 +1,10 @@
-import React, { FC, lazy, useState, Suspense, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
-import { UserData, useLoginMutation, UserDataLogin } from '../../app/services/api'
+import { useLoginMutation, UserDataLogin } from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
-import { Button,  notification } from 'antd';
+import { notification } from 'antd';
 import type { NotificationPlacement } from 'antd/es/notification/interface';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage'
 
@@ -55,8 +55,6 @@ const Login: FC = () => {
     }
   }
 
-  console.log(error)
-
 
   return (
     <LayoutEnter>
@@ -70,6 +68,11 @@ const Login: FC = () => {
         valuePass={inputPassValue}
         onChangePass={(event) => setInputPassValue(event.target.value)}
         linkTo={Paths.signup}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            sendLoginData(currentUserData)
+          }
+        }}
         onClick={sendLoginData}
       />
       <ErrorMessage message={error}/>
