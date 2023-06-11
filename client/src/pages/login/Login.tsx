@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
 import { useLoginMutation, UserDataLogin } from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
-import { notification } from 'antd';
-import type { NotificationPlacement } from 'antd/es/notification/interface';
-import ErrorMessage from '../../components/errorMessage/ErrorMessage'
+import { notification, message } from 'antd'
+import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 
 const Login: FC = () => {
@@ -14,14 +14,16 @@ const Login: FC = () => {
   const [inputPassValue, setInputPassValue] = useState('')
   const [error, setError] = useState('')
   const [sendLoginUser, loginUserResult] = useLoginMutation()
+  const navigate = useNavigate()
 
   const [api, contextHolder] = notification.useNotification()
+  const [messageApi, contextHolderMessage] = message.useMessage()
 
   useEffect(() => {
     const openNotification = (placement: NotificationPlacement) => {
       api.open({
         message: 'Notification:',
-        description:` 
+        description: ` 
           Sign in or Sign up as a new user.
           Email: admin@admin.com
           Password: 123456789`,
@@ -36,32 +38,38 @@ const Login: FC = () => {
           fontWeight: 'bold',
           borderRadius: 10,
         },
-      });
-    };
+      })
+    }
     openNotification('topLeft')
   }, [])
+
+  const errorMessage = (currentError: string) => {
+    messageApi.open({
+      type: 'error',
+      content: currentError,
+    })
+  }
 
   const currentUserData = {
     email: inputEmailValue,
     password: inputPassValue,
-}
+  }
 
   const sendLoginData = async (data: UserDataLogin) => {
     try {
       await sendLoginUser(currentUserData).unwrap()
+      navigate('/home')
     } catch (err) {
       const ifError = isErrorWithMessage(err)
-      ifError ? setError(err.data.message) : setError('Unknown error')
+      ifError && setError(err.data.message)
+      errorMessage(error)
     }
   }
-
 
   return (
     <LayoutEnter>
       {contextHolder}
-      {/*<Button type="primary" onClick={openNotification}>*/}
-      {/*  Open the notification box*/}
-      {/*</Button>*/}
+      {contextHolderMessage}
       <SignIn
         valueEmail={inputEmailValue}
         onChangeEmail={(event) => setInputEmailValue(event.target.value)}
@@ -75,7 +83,6 @@ const Login: FC = () => {
         }}
         onClick={sendLoginData}
       />
-      <ErrorMessage message={error}/>
     </LayoutEnter>
   )
 }

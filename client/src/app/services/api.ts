@@ -10,11 +10,12 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:8000/api',
 })
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 })
+// const baseQueryWithRetry = retry(baseQuery, {maxRetries: 1})
 
 export const apiAuth = createApi({
   reducerPath: 'apiAuth',
-  baseQuery: baseQueryWithRetry,
+  baseQuery: baseQuery,
+  // baseQuery: baseQueryWithRetry,
   tagTypes: ['Auth'],
   refetchOnMountOrArgChange: true,
   endpoints: (build) => ({
