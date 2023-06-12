@@ -8,6 +8,11 @@ type ResponseLoginData = User & { token: string }
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:8000/api',
+  prepareHeaders(headers, { getState }) {
+    const token = (getState() as RootState).authReducer.user?.token ||
+      localStorage.getItem('token')
+    token && headers.set('authorization', `Bearer ${token}`)
+  },
 })
 
 // const baseQueryWithRetry = retry(baseQuery, {maxRetries: 1})
@@ -15,7 +20,6 @@ const baseQuery = fetchBaseQuery({
 export const apiAuth = createApi({
   reducerPath: 'apiAuth',
   baseQuery: baseQuery,
-  // baseQuery: baseQueryWithRetry,
   tagTypes: ['Auth'],
   refetchOnMountOrArgChange: true,
   endpoints: (build) => ({
