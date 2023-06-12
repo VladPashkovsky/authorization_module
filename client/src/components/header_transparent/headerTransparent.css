@@ -50,7 +50,7 @@ nav ul li:hover {
     background: rgba(0,0,0, 0.75);
 }
 
-nav ul li a {
+nav ul li span {
     position: relative;
     display: block;
     height: 70px;
