@@ -56,7 +56,7 @@ const editWater = async (req, res, next) => {
   }
 }
 
-const remove = async (req, res, next) => {
+const removeWater = async (req, res, next) => {
   try {
     //const { id } = req.body
     const { id } = req.params
@@ -75,5 +75,5 @@ module.exports = {
   getWaterById,
   addWater,
   editWater,
-  remove,
+  removeWater,
 }

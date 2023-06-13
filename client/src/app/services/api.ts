@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/dist/query/react'
 import { RootState } from '../store'
-import { User } from '@prisma/client'
+import { User, Water } from '@prisma/client'
 
 export type UserDataLogin = Omit<User, 'id' | 'name'>
 export type UserData = Omit<User, 'id'>
@@ -41,3 +41,51 @@ export const apiAuth = createApi({
 export const { useLoginMutation, useRegisterMutation, useCurrentQuery } = apiAuth
 export const { endpoints: { login, register, current } } = apiAuth
 
+//==============================================================================
+
+export const apiWater = createApi({
+  reducerPath: 'apiWater',
+  baseQuery: baseQuery,
+  tagTypes: ['Water'],
+  refetchOnMountOrArgChange: true,
+  endpoints: (build) => ({
+    getAllWaters: build.query<Water[], void>({
+      query: () => ({ url: 'water' }),
+      providesTags: result => ['Water'],
+    }),
+    getWaterById: build.query<Water, string>({
+      query: (id) => ({ url: `water/:${id}` }),
+      providesTags: result => ['Water'],
+    }),
+    addWater: build.mutation<Water, Water>({
+      query: (water) => ({ url: `water/add`, method: 'POST', body: water }),
+      invalidatesTags: ['Water'],
+    }),
+    editWater: build.mutation<string, Water>({
+      query: (water) => ({ url: `water/edit/${water.id}`, method: 'PUT' }),
+      invalidatesTags: ['Water'],
+    }),
+    removeWater: build.mutation<string, string>({
+      query: (id) => ({ url: `water/remove/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Water'],
+    }),
+  }),
+})
+
+export const {
+  useGetAllWatersQuery,
+  useGetWaterByIdQuery,
+  useAddWaterMutation,
+  useEditWaterMutation,
+  useRemoveWaterMutation,
+} = apiWater
+
+export const {
+  endpoints: {
+    getAllWaters,
+    getWaterById,
+    addWater,
+    editWater,
+    removeWater,
+  },
+} = apiWater
