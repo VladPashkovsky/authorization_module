@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authSlice'
+import waterReducer from '../features/water/waterSlice'
 import { apiAuth } from './services/api'
 import { authMiddleware } from '../middleware/authMiddleware'
 
 export const store = configureStore({
   reducer: {
     authReducer,
+    waterReducer,
     [apiAuth.reducerPath]: apiAuth.reducer,
   },
   middleware: getDefaultMiddleware =>
