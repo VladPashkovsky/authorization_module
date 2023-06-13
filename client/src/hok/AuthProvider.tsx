@@ -7,9 +7,9 @@ interface AuthProviderProps {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const { isLoading } = useCurrentQuery()
-  if (isLoading) {
-    return <span>Loading...</span>
-  }
+  // if (isLoading) {
+  //   return <span>Loading...</span>
+  // }
 
   return (
     children
