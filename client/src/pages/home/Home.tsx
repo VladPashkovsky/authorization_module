@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import LayoutBasic from '../../components/layoutBasic/LayoutBasic'
 import { DownOutlined } from '@ant-design/icons';
 import type { RadioChangeEvent } from 'antd';
@@ -10,6 +10,8 @@ import { useGetAllWatersQuery } from '../../app/services/api'
 import { Water } from '@prisma/client'
 import { useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
+import {useAppSelector} from '../../app/hooks'
+import {selectUser} from '../../features/auth/authSlice'
 
 // const columnsWater: ColumnsType<Water> = [
 //   {
@@ -133,6 +135,11 @@ const defaultFooter = () => 'Here is footer';
 const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
+  const user = useAppSelector(selectUser)
+
+  useEffect(() => {
+    !user && navigate('/')
+  }, [navigate, user])
 
   const [bordered, setBordered] = useState(false);
   const [loading, setLoading] = useState(false);
