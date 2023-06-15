@@ -1,9 +1,21 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import './headerTransparent.css'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { logout, selectUser } from '../../features/auth/authSlice'
 
 const HeaderTransparent: FC = () => {
+  const user = useAppSelector(selectUser)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const logOutClick = () => {
+    dispatch(logout())
+    localStorage.removeItem('token')
+    navigate('/')
+  }
+
   return (
     <div className='container_header'>
       <nav>
@@ -16,9 +28,7 @@ const HeaderTransparent: FC = () => {
           <Link to={Paths.login} style={{ textDecoration: 'none' }}>
             <li><span> Something </span></li>
           </Link>
-          <Link to={Paths.login} style={{ textDecoration: 'none' }}>
-            <li><span>Logout </span></li>
-          </Link>
+          <li onClick={logOutClick}><span>Logout </span></li>
         </ul>
       </nav>
       <section className='sec1'></section>

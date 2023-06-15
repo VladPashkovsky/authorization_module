@@ -8,10 +8,11 @@ type ResponseLoginData = User & { token: string }
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:8000/api',
-  prepareHeaders(headers, { getState }) {
+  prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).authReducer.user?.token ||
       localStorage.getItem('token')
     token && headers.set('authorization', `Bearer ${token}`)
+    return headers
   },
 })
 

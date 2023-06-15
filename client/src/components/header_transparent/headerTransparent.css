@@ -60,3 +60,7 @@ nav ul li span {
     color: white;
     text-decoration: none;
 }
+
+nav ul li span:hover {
+    cursor: pointer;
+}

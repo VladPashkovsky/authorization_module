@@ -6,12 +6,13 @@ import { Table, Form, Radio, Space, Switch } from 'antd'
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { ExpandableConfig, TableRowSelection } from 'antd/es/table/interface';
-import { useGetAllWatersQuery } from '../../app/services/api'
+import { useCurrentQuery, useGetAllWatersQuery } from '../../app/services/api'
 import { Water } from '@prisma/client'
 import { useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import {useAppSelector} from '../../app/hooks'
 import {selectUser} from '../../features/auth/authSlice'
+import { useSelector } from 'react-redux'
 
 // const columnsWater: ColumnsType<Water> = [
 //   {
@@ -137,9 +138,13 @@ const Home: FC = () => {
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
 
+
   useEffect(() => {
-    !user && navigate('/')
+    if (!user) {
+      navigate('/')
+    }
   }, [navigate, user])
+
 
   const [bordered, setBordered] = useState(false);
   const [loading, setLoading] = useState(false);
