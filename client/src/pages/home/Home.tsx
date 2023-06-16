@@ -50,73 +50,7 @@ interface DataType {
   description: string;
 }
 
-type TablePaginationPosition =
-  | 'topLeft'
-  | 'topCenter'
-  | 'topRight'
-  | 'bottomLeft'
-  | 'bottomCenter'
-  | 'bottomRight';
 
-const columns: ColumnsType<Water> = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    key: 'id',
-    // sorter: (a, b) => a.age - b.age,
-  },
-  {
-    title: 'BRAND',
-    dataIndex: 'brand',
-    key: 'brand',
-    // filters: [
-    //   {text: 'brand', value: 'brand'},
-    //   {text: 'brand', value: 'brand'}
-    // ],
-    // onFilter: (value, record) => record.brand.indexOf(value as string) === 0,
-  },
-  {
-    title: 'DESCRIPTION',
-    dataIndex: 'description',
-    key: 'description'
-  },
-  {
-    title: 'DETAILS',
-    dataIndex: 'details',
-    key: 'details'
-  },
-  {
-    title: 'PRICE',
-    dataIndex: 'price',
-    key: 'price'
-  },
-  {
-    title: 'IMAGE',
-    dataIndex: 'imageUrl',
-    key: 'imageUrl'
-  },
-  {
-    title: 'USER',
-    dataIndex: 'user',
-    key: 'user'
-  },
-  // {
-  //   title: 'Action',
-  //   key: 'action',
-  //   sorter: true,
-  //   render: () => (
-  //     <Space size="middle">
-  //       <a>Delete</a>
-  //       <a>
-  //         <Space>
-  //           More actions
-  //           <DownOutlined />
-  //         </Space>
-  //       </a>
-  //     </Space>
-  //   ),
-  // },
-];
 
 // const data: DataType[] = [];
 // for (let i = 1; i <= 10; i++) {
@@ -137,6 +71,94 @@ const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
+
+
+  type TablePaginationPosition =
+    | 'topLeft'
+    | 'topCenter'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomCenter'
+    | 'bottomRight';
+
+  // const brandName = data!.map((brand) => brand.brand )
+  // console.log(brandName)
+  // const linkImageUrl = data!.map((link) => link.imageUrl)
+
+  const columns: ColumnsType<Water> = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+      // sorter: (a, b) => a.age - b.age,
+    },
+    {
+      title: 'BRAND',
+      dataIndex: 'brand',
+      key: 'brand',
+      // sorter: true,
+      // filters: [
+      //   {text: `text`, value: `value`},
+      //   {text: 'brand', value: 'brand'}
+      // ],
+      // onFilter: (value, record) => record.brand.indexOf(value as string) === 0,
+    },
+    {
+      title: 'DESCRIPTION',
+      dataIndex: 'description',
+      key: 'description'
+    },
+    {
+      title: 'DETAILS',
+      dataIndex: 'details',
+      key: 'details'
+    },
+    {
+      title: 'PRICE',
+      dataIndex: 'price',
+      key: 'price'
+    },
+    {
+      title: 'IMAGE',
+      // dataIndex: 'imageUrl',
+      key: 'imageUrl',
+      render: () => (
+        <Space size='middle'>
+          <a href='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg'>Image</a>
+        </Space>
+      ),
+    },
+    {
+      title: 'USER',
+      dataIndex: 'user',
+      key: 'user'
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: () => (
+        <Space size="middle">
+          <a>Delete</a>
+        </Space>
+      ),
+    }
+    // {
+    //   title: 'Action',
+    //   key: 'action',
+    //   sorter: true,
+    //   render: () => (
+    //     <Space size="middle">
+    //       <a>Delete</a>
+    //       <a>
+    //         <Space>
+    //           More actions
+    //           <DownOutlined />
+    //         </Space>
+    //       </a>
+    //     </Space>
+    //   ),
+    // },
+  ];
 
 
   useEffect(() => {
@@ -245,12 +267,11 @@ const Home: FC = () => {
 
   return (
     <LayoutBasic>
-
       <>
         <Form
           layout="inline"
           className="components-table-demo-control-bar"
-          style={{ marginBottom: 16 }}
+          style={{ margin: '0px 20px 10px 20px', background: 'lightgray', padding: '5px 0 5px 250px' }}
         >
           <Form.Item label="Bordered">
             <Switch checked={bordered} onChange={handleBorderChange} />
@@ -330,7 +351,7 @@ const Home: FC = () => {
             </Radio.Group>
           </Form.Item>
         </Form>
-        <Table
+        <Table style={{margin: '0 20px 0 20px', opacity: '0.9', fontWeight: 'bold'}}
           {...tableProps}
           pagination={{ position: [top as TablePaginationPosition, bottom] }}
           columns={tableColumns}
