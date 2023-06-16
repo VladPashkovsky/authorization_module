@@ -147,17 +147,17 @@ const Home: FC = () => {
 
 
   const [bordered, setBordered] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [size, setSize] = useState<SizeType>('large');
-  const [expandable, setExpandable] = useState<ExpandableConfig<Water> | undefined>(
-    defaultExpandable,
-  );
-  const [showTitle, setShowTitle] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  const [showfooter, setShowFooter] = useState(true);
+  // const [expandable, setExpandable] = useState<ExpandableConfig<Water> | undefined>(
+  //   defaultExpandable,
+  // );
+  // const [showTitle, setShowTitle] = useState(false);
+  // const [showHeader, setShowHeader] = useState(true);
+  // const [showfooter, setShowFooter] = useState(true);
   const [rowSelection, setRowSelection] = useState<TableRowSelection<Water> | undefined>({});
   const [hasData, setHasData] = useState(true);
-  const [tableLayout, setTableLayout] = useState();
+  // const [tableLayout, setTableLayout] = useState();
   const [top, setTop] = useState<TablePaginationPosition | 'none'>('none');
   const [bottom, setBottom] = useState<TablePaginationPosition>('bottomRight');
   const [ellipsis, setEllipsis] = useState(false);
@@ -168,53 +168,53 @@ const Home: FC = () => {
     setBordered(enable);
   };
 
-  const handleLoadingChange = (enable: boolean) => {
-    setLoading(enable);
-  };
+  // const handleLoadingChange = (enable: boolean) => {
+  //   setLoading(enable);
+  // };
 
   const handleSizeChange = (e: RadioChangeEvent) => {
     setSize(e.target.value);
   };
 
-  const handleTableLayoutChange = (e: RadioChangeEvent) => {
-    setTableLayout(e.target.value);
-  };
+  // const handleTableLayoutChange = (e: RadioChangeEvent) => {
+  //   setTableLayout(e.target.value);
+  // };
 
-  const handleExpandChange = (enable: boolean) => {
-    setExpandable(enable ? defaultExpandable : undefined);
-  };
+  // const handleExpandChange = (enable: boolean) => {
+  //   setExpandable(enable ? defaultExpandable : undefined);
+  // };
 
   const handleEllipsisChange = (enable: boolean) => {
     setEllipsis(enable);
   };
 
-  const handleTitleChange = (enable: boolean) => {
-    setShowTitle(enable);
-  };
+  // const handleTitleChange = (enable: boolean) => {
+  //   setShowTitle(enable);
+  // };
 
-  const handleHeaderChange = (enable: boolean) => {
-    setShowHeader(enable);
-  };
+//   const handleHeaderChange = (enable: boolean) => {
+//     setShowHeader(enable);
+//   };
 
-  const handleFooterChange = (enable: boolean) => {
-    setShowFooter(enable);
-  };
+  // const handleFooterChange = (enable: boolean) => {
+  //   setShowFooter(enable);
+  // };
 
   const handleRowSelectionChange = (enable: boolean) => {
     setRowSelection(enable ? {} : undefined);
   };
 
-  const handleYScrollChange = (enable: boolean) => {
-    setYScroll(enable);
-  };
+  // const handleYScrollChange = (enable: boolean) => {
+  //   setYScroll(enable);
+  // };
 
   const handleXScrollChange = (e: RadioChangeEvent) => {
     setXScroll(e.target.value);
   };
 
-  const handleDataChange = (newHasData: boolean) => {
-    setHasData(newHasData);
-  };
+  // const handleDataChange = (newHasData: boolean) => {
+  //   setHasData(newHasData);
+  // };
 
   const scroll: { x?: number | string; y?: number | string } = {};
   if (yScroll) {
@@ -232,15 +232,15 @@ const Home: FC = () => {
 
   const tableProps: TableProps<Water> = {
     bordered,
-    loading,
+    // loading,
     size,
-    expandable,
-    title: showTitle ? defaultTitle : undefined,
-    showHeader,
-    footer: showfooter ? defaultFooter : undefined,
+    // expandable,
+    // title: showTitle ? defaultTitle : undefined,
+    // showHeader,
+    // footer: showfooter ? defaultFooter : undefined,
     rowSelection,
     scroll,
-    tableLayout,
+    // tableLayout,
   };
 
   return (
@@ -255,30 +255,31 @@ const Home: FC = () => {
           <Form.Item label="Bordered">
             <Switch checked={bordered} onChange={handleBorderChange} />
           </Form.Item>
-          <Form.Item label="loading">
-            <Switch checked={loading} onChange={handleLoadingChange} />
-          </Form.Item>
-          <Form.Item label="Title">
-            <Switch checked={showTitle} onChange={handleTitleChange} />
-          </Form.Item>
-          <Form.Item label="Column Header">
-            <Switch checked={showHeader} onChange={handleHeaderChange} />
-          </Form.Item>
-          <Form.Item label="Footer">
-            <Switch checked={showfooter} onChange={handleFooterChange} />
-          </Form.Item>
-          <Form.Item label="Expandable">
-            <Switch checked={!!expandable} onChange={handleExpandChange} />
-          </Form.Item>
+          {/*<Form.Item label="loading">*/}
+          {/*  <Switch checked={loading} onChange={handleLoadingChange} />*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Title">*/}
+          {/*  <Switch checked={showTitle} onChange={handleTitleChange} />*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Column Header" >*/}
+            {/*<Switch checked={showHeader} onChange={handleHeaderChange} />*/}
+            {/*<Switch checked={showHeader} />*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Footer">*/}
+          {/*  <Switch checked={showfooter} onChange={handleFooterChange} />*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Expandable">*/}
+          {/*  <Switch checked={!!expandable} onChange={handleExpandChange} />*/}
+          {/*</Form.Item>*/}
           <Form.Item label="Checkbox">
             <Switch checked={!!rowSelection} onChange={handleRowSelectionChange} />
           </Form.Item>
-          <Form.Item label="Fixed Header">
-            <Switch checked={!!yScroll} onChange={handleYScrollChange} />
-          </Form.Item>
-          <Form.Item label="Has Data">
-            <Switch checked={!!hasData} onChange={handleDataChange} />
-          </Form.Item>
+          {/*<Form.Item label="Fixed Header">*/}
+          {/*  <Switch checked={!!yScroll} onChange={handleYScrollChange} />*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Has Data">*/}
+          {/*  <Switch checked={!!hasData} onChange={handleDataChange} />*/}
+          {/*</Form.Item>*/}
           <Form.Item label="Ellipsis">
             <Switch checked={!!ellipsis} onChange={handleEllipsisChange} />
           </Form.Item>
@@ -289,32 +290,32 @@ const Home: FC = () => {
               <Radio.Button value="small">Small</Radio.Button>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Table Scroll">
-            <Radio.Group value={xScroll} onChange={handleXScrollChange}>
-              <Radio.Button value={undefined}>Unset</Radio.Button>
-              <Radio.Button value="scroll">Scroll</Radio.Button>
-              <Radio.Button value="fixed">Fixed Columns</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item label="Table Layout">
-            <Radio.Group value={tableLayout} onChange={handleTableLayoutChange}>
-              <Radio.Button value={undefined}>Unset</Radio.Button>
-              <Radio.Button value="fixed">Fixed</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item label="Pagination Top">
-            <Radio.Group
-              value={top}
-              onChange={(e) => {
-                setTop(e.target.value);
-              }}
-            >
-              <Radio.Button value="topLeft">TopLeft</Radio.Button>
-              <Radio.Button value="topCenter">TopCenter</Radio.Button>
-              <Radio.Button value="topRight">TopRight</Radio.Button>
-              <Radio.Button value="none">None</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
+          {/*<Form.Item label="Table Scroll">*/}
+          {/*  <Radio.Group value={xScroll} onChange={handleXScrollChange}>*/}
+          {/*    <Radio.Button value={undefined}>Unset</Radio.Button>*/}
+          {/*    <Radio.Button value="scroll">Scroll</Radio.Button>*/}
+          {/*    <Radio.Button value="fixed">Fixed Columns</Radio.Button>*/}
+          {/*  </Radio.Group>*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Table Layout">*/}
+          {/*  <Radio.Group value={tableLayout} onChange={handleTableLayoutChange}>*/}
+          {/*    <Radio.Button value={undefined}>Unset</Radio.Button>*/}
+          {/*    <Radio.Button value="fixed">Fixed</Radio.Button>*/}
+          {/*  </Radio.Group>*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item label="Pagination Top">*/}
+          {/*  <Radio.Group*/}
+          {/*    value={top}*/}
+          {/*    onChange={(e) => {*/}
+          {/*      setTop(e.target.value);*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <Radio.Button value="topLeft">TopLeft</Radio.Button>*/}
+          {/*    <Radio.Button value="topCenter">TopCenter</Radio.Button>*/}
+          {/*    <Radio.Button value="topRight">TopRight</Radio.Button>*/}
+          {/*    <Radio.Button value="none">None</Radio.Button>*/}
+          {/*  </Radio.Group>*/}
+          {/*</Form.Item>*/}
           <Form.Item label="Pagination Bottom">
             <Radio.Group
               value={bottom}
@@ -322,10 +323,10 @@ const Home: FC = () => {
                 setBottom(e.target.value);
               }}
             >
-              <Radio.Button value="bottomLeft">BottomLeft</Radio.Button>
-              <Radio.Button value="bottomCenter">BottomCenter</Radio.Button>
+              {/*<Radio.Button value="bottomLeft">BottomLeft</Radio.Button>*/}
+              {/*<Radio.Button value="bottomCenter">BottomCenter</Radio.Button>*/}
               <Radio.Button value="bottomRight">BottomRight</Radio.Button>
-              <Radio.Button value="none">None</Radio.Button>
+              {/*<Radio.Button value="none">None</Radio.Button>*/}
             </Radio.Group>
           </Form.Item>
         </Form>
