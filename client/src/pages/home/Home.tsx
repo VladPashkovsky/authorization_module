@@ -323,8 +323,13 @@ const Home: FC = () => {
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item label='ADD NEW'>
-            <Radio.Button value="large" onClick={addNewWater}>Add</Radio.Button>
+          <Form.Item label='ADD NEW' >
+            <Radio.Button
+              style={{background: '#1677ff', color: 'white'}}
+              value="large"
+              onClick={addNewWater}
+            >Add
+            </Radio.Button>
           </Form.Item>
 
         </Form>
