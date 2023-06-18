@@ -222,6 +222,10 @@ const Home: FC = () => {
     // tableLayout,
   };
 
+  const addNewWater = () => {
+      navigate(Paths.waterAdd)
+  }
+
   useEffect(() => {
     if (!user) {
       navigate('/')
@@ -318,6 +322,11 @@ const Home: FC = () => {
               {/*<Radio.Button value="none">None</Radio.Button>*/}
             </Radio.Group>
           </Form.Item>
+
+          <Form.Item label='ADD NEW'>
+            <Radio.Button value="large" onClick={addNewWater}>Add</Radio.Button>
+          </Form.Item>
+
         </Form>
         <Table style={{margin: '0 20px 0 20px', opacity: '0.9', fontWeight: 'bold',}}
                {...tableProps}
