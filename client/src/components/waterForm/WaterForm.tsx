@@ -15,7 +15,7 @@ interface WaterFormProps<T> {
 
 const WaterForm: FC<WaterFormProps<Water>> = ({ onFinish, btnText, title, error, water }) => {
   return (
-    <Card title={title} style={{ width: '30rem' }}>
+    <Card title={title} style={{ width: '30rem', opacity: 0.9 }}>
       <Form name='water_form' onFinish={onFinish} initialValues={water}>
         <CustomInput name='brand' placeholder='Brand' />
         <CustomInput name='description' placeholder='Description' />
