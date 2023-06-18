@@ -16,8 +16,9 @@ const HeaderTransparent: FC = () => {
     navigate('/')
   }
 
+
   return (
-    <div className='container_header'>
+    <div id='container_header'>
       <nav>
         <div className='brand'>
           <Link to={Paths.home} style={{ textDecoration: 'none' }}>

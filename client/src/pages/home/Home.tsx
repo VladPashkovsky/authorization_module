@@ -12,66 +12,42 @@ import { useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import {useAppSelector} from '../../app/hooks'
 import {selectUser} from '../../features/auth/authSlice'
-import { useSelector } from 'react-redux'
-
-// const columnsWater: ColumnsType<Water> = [
-//   {
-//     title: 'Brand',
-//     dataIndex: 'brand',
-//     key: 'brand',
-//   },
-//   {
-//     title: 'Description',
-//     dataIndex: 'description',
-//     key: 'description',
-//   },
-//   {
-//     title: 'Details',
-//     dataIndex: 'details',
-//     key: 'details',
-//   },
-//   {
-//     title: 'Price',
-//     dataIndex: 'price',
-//     key: 'price',
-//   },
-//   {
-//     title: 'Image',
-//     dataIndex: 'imageUrl',
-//     key: 'details',
-//   },
-// ]
-
-interface DataType {
-  key: number;
-  name: string;
-  age: number;
-  address: string;
-  description: string;
-}
 
 
-
-// const data: DataType[] = [];
-// for (let i = 1; i <= 10; i++) {
-//   data.push({
-//     key: i,
-//     name: 'John Brown',
-//     age: Number(`${i}2`),
-//     address: `New York No. ${i} Lake Park`,
-//     description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-//   });
+// interface DataType {
+//   key: number;
+//   name: string;
+//   age: number;
+//   address: string;
+//   description: string;
 // }
-
-const defaultExpandable = { expandedRowRender: (record: Water) => <p>{record.description}</p> };
-const defaultTitle = () => 'Here is title';
-const defaultFooter = () => 'Here is footer';
 
 const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
 
+  const [bordered, setBordered] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [size, setSize] = useState<SizeType>('large');
+  // const [expandable, setExpandable] = useState<ExpandableConfig<Water> | undefined>(
+  //   defaultExpandable,
+  // );
+  // const [showTitle, setShowTitle] = useState(false);
+  // const [showHeader, setShowHeader] = useState(true);
+  // const [showfooter, setShowFooter] = useState(true);
+  const [rowSelection, setRowSelection] = useState<TableRowSelection<Water> | undefined>({});
+  const [hasData, setHasData] = useState(true);
+  // const [tableLayout, setTableLayout] = useState();
+  const [top, setTop] = useState<TablePaginationPosition | 'none'>('none');
+  const [bottom, setBottom] = useState<TablePaginationPosition>('bottomRight');
+  const [ellipsis, setEllipsis] = useState(false);
+  const [yScroll, setYScroll] = useState(true);
+  const [xScroll, setXScroll] = useState<string>();
+
+  const defaultExpandable = { expandedRowRender: (record: Water) => <p>{record.description}</p> };
+  const defaultTitle = () => 'Here is title';
+  const defaultFooter = () => 'Here is footer';
 
   type TablePaginationPosition =
     | 'topLeft'
@@ -80,10 +56,6 @@ const Home: FC = () => {
     | 'bottomLeft'
     | 'bottomCenter'
     | 'bottomRight';
-
-  // const brandName = data!.map((brand) => brand.brand )
-  // console.log(brandName)
-  // const linkImageUrl = data!.map((link) => link.imageUrl)
 
   const columns: ColumnsType<Water> = [
     {
@@ -141,7 +113,7 @@ const Home: FC = () => {
           <a>Delete</a>
         </Space>
       ),
-    }
+    },
     // {
     //   title: 'Action',
     //   key: 'action',
@@ -158,33 +130,18 @@ const Home: FC = () => {
     //     </Space>
     //   ),
     // },
-  ];
+]
 
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/')
-    }
-  }, [navigate, user])
-
-
-  const [bordered, setBordered] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  const [size, setSize] = useState<SizeType>('large');
-  // const [expandable, setExpandable] = useState<ExpandableConfig<Water> | undefined>(
-  //   defaultExpandable,
-  // );
-  // const [showTitle, setShowTitle] = useState(false);
-  // const [showHeader, setShowHeader] = useState(true);
-  // const [showfooter, setShowFooter] = useState(true);
-  const [rowSelection, setRowSelection] = useState<TableRowSelection<Water> | undefined>({});
-  const [hasData, setHasData] = useState(true);
-  // const [tableLayout, setTableLayout] = useState();
-  const [top, setTop] = useState<TablePaginationPosition | 'none'>('none');
-  const [bottom, setBottom] = useState<TablePaginationPosition>('bottomRight');
-  const [ellipsis, setEllipsis] = useState(false);
-  const [yScroll, setYScroll] = useState(false);
-  const [xScroll, setXScroll] = useState<string>();
+  // const data: DataType[] = [];
+  // for (let i = 1; i <= 10; i++) {
+  //   data.push({
+  //     key: i,
+  //     name: 'John Brown',
+  //     age: Number(`${i}2`),
+  //     address: `New York No. ${i} Lake Park`,
+  //     description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
+  //   });
+  // }
 
   const handleBorderChange = (enable: boolean) => {
     setBordered(enable);
@@ -226,9 +183,9 @@ const Home: FC = () => {
     setRowSelection(enable ? {} : undefined);
   };
 
-  // const handleYScrollChange = (enable: boolean) => {
-  //   setYScroll(enable);
-  // };
+  const handleYScrollChange = (enable: boolean) => {
+    setYScroll(enable);
+  };
 
   const handleXScrollChange = (e: RadioChangeEvent) => {
     setXScroll(e.target.value);
@@ -240,7 +197,7 @@ const Home: FC = () => {
 
   const scroll: { x?: number | string; y?: number | string } = {};
   if (yScroll) {
-    scroll.y = 240;
+    scroll.y = 600;
   }
   if (xScroll) {
     scroll.x = '100vw';
@@ -265,17 +222,23 @@ const Home: FC = () => {
     // tableLayout,
   };
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/')
+    }
+  }, [navigate, user])
+
   return (
     <LayoutBasic>
-      <>
         <Form
           layout="inline"
           className="components-table-demo-control-bar"
-          style={{ margin: '0px 20px 10px 20px', background: 'lightgray', padding: '5px 0 5px 250px' }}
+          style={{ margin: '0px 20px 10px 20px', background: 'lightgray', padding: '5px 0 5px 350px', }}
         >
           <Form.Item label="Bordered">
             <Switch checked={bordered} onChange={handleBorderChange} />
           </Form.Item>
+
           {/*<Form.Item label="loading">*/}
           {/*  <Switch checked={loading} onChange={handleLoadingChange} />*/}
           {/*</Form.Item>*/}
@@ -283,8 +246,8 @@ const Home: FC = () => {
           {/*  <Switch checked={showTitle} onChange={handleTitleChange} />*/}
           {/*</Form.Item>*/}
           {/*<Form.Item label="Column Header" >*/}
-            {/*<Switch checked={showHeader} onChange={handleHeaderChange} />*/}
-            {/*<Switch checked={showHeader} />*/}
+          {/*<Switch checked={showHeader} onChange={handleHeaderChange} />*/}
+          {/*<Switch checked={showHeader} />*/}
           {/*</Form.Item>*/}
           {/*<Form.Item label="Footer">*/}
           {/*  <Switch checked={showfooter} onChange={handleFooterChange} />*/}
@@ -292,16 +255,19 @@ const Home: FC = () => {
           {/*<Form.Item label="Expandable">*/}
           {/*  <Switch checked={!!expandable} onChange={handleExpandChange} />*/}
           {/*</Form.Item>*/}
+
           <Form.Item label="Checkbox">
             <Switch checked={!!rowSelection} onChange={handleRowSelectionChange} />
           </Form.Item>
-          {/*<Form.Item label="Fixed Header">*/}
-          {/*  <Switch checked={!!yScroll} onChange={handleYScrollChange} />*/}
-          {/*</Form.Item>*/}
+
+          <Form.Item label="Fixed Header">
+            <Switch checked={!!yScroll} onChange={handleYScrollChange} />
+          </Form.Item>
           {/*<Form.Item label="Has Data">*/}
           {/*  <Switch checked={!!hasData} onChange={handleDataChange} />*/}
           {/*</Form.Item>*/}
-          <Form.Item label="Ellipsis">
+
+          <Form.Item label="Short">
             <Switch checked={!!ellipsis} onChange={handleEllipsisChange} />
           </Form.Item>
           <Form.Item label="Size">
@@ -311,6 +277,7 @@ const Home: FC = () => {
               <Radio.Button value="small">Small</Radio.Button>
             </Radio.Group>
           </Form.Item>
+
           {/*<Form.Item label="Table Scroll">*/}
           {/*  <Radio.Group value={xScroll} onChange={handleXScrollChange}>*/}
           {/*    <Radio.Button value={undefined}>Unset</Radio.Button>*/}
@@ -337,7 +304,8 @@ const Home: FC = () => {
           {/*    <Radio.Button value="none">None</Radio.Button>*/}
           {/*  </Radio.Group>*/}
           {/*</Form.Item>*/}
-          <Form.Item label="Pagination Bottom">
+
+          <Form.Item label="">
             <Radio.Group
               value={bottom}
               onChange={(e) => {
@@ -346,36 +314,38 @@ const Home: FC = () => {
             >
               {/*<Radio.Button value="bottomLeft">BottomLeft</Radio.Button>*/}
               {/*<Radio.Button value="bottomCenter">BottomCenter</Radio.Button>*/}
-              <Radio.Button value="bottomRight">BottomRight</Radio.Button>
+              {/*<Radio.Button value="bottomRight">BottomRight</Radio.Button>*/}
               {/*<Radio.Button value="none">None</Radio.Button>*/}
             </Radio.Group>
           </Form.Item>
         </Form>
-        <Table style={{margin: '0 20px 0 20px', opacity: '0.9', fontWeight: 'bold'}}
-          {...tableProps}
-          pagination={{ position: [top as TablePaginationPosition, bottom] }}
-          columns={tableColumns}
-          loading={isLoading}
-          dataSource={hasData ? data : []}
-          rowKey={(record) => record.id}
-          onRow={(record) => {
-            return {onClick: () => navigate(`${Paths.water}/${record.id}`)}
-          }}
-          scroll={scroll}
+        <Table style={{margin: '0 20px 0 20px', opacity: '0.9', fontWeight: 'bold',}}
+               {...tableProps}
+               pagination={{ position: [top as TablePaginationPosition, bottom] }}
+               columns={tableColumns}
+               loading={isLoading}
+               dataSource={hasData ? data : []}
+               rowKey={(record) => record.id}
+               onRow={(record) => {
+                 return {onClick: () => navigate(`${Paths.water}/${record.id}`)}
+               }}
+               scroll={scroll}
         />
-      </>
 
-      {/*<Table style={{opacity: '0.85'}}*/}
-      {/*  loading={isLoading}*/}
-      {/*  dataSource={data}*/}
-      {/*  pagination={false}*/}
-      {/*  columns={columnsWater}*/}
-      {/*  rowKey={(record) => record.id}*/}
-      {/*  onRow={(record) => {*/}
-      {/*    return { onClick: () => navigate(`${Paths.water}/${record.id}`) }*/}
-      {/*  }}*/}
-      {/*/>*/}
+
+        {/*<Table style={{opacity: '0.85'}}*/}
+        {/*  loading={isLoading}*/}
+        {/*  dataSource={data}*/}
+        {/*  pagination={false}*/}
+        {/*  columns={columnsWater}*/}
+        {/*  rowKey={(record) => record.id}*/}
+        {/*  onRow={(record) => {*/}
+        {/*    return { onClick: () => navigate(`${Paths.water}/${record.id}`) }*/}
+        {/*  }}*/}
+        {/*/>*/}
+
     </LayoutBasic>
+
   )
 }
 
