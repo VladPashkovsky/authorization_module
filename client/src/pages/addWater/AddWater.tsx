@@ -35,13 +35,15 @@ const AddWater: FC = () => {
 
   return (
     <LayoutBasic>
-      <WaterForm
-        title='Add New Water'
-        btnText='Add'
-        onFinish={addNewWater}
-        error={error}
+      <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px'}}>
+        <WaterForm
+          title='Add New Water'
+          btnText='Add'
+          onFinish={addNewWater}
+          error={error}
+        />
+      </div>
 
-      />
     </LayoutBasic>
   )
 }

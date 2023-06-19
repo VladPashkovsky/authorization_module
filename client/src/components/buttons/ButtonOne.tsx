@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { Button, Form } from 'antd'
 
 type Props = {
@@ -9,10 +9,11 @@ type Props = {
   danger?: boolean | undefined,
   loading?: boolean | { delay?: number | undefined } | undefined,
   shape?: 'default' | 'circle' | 'round' | undefined,
-  icon?: React.ReactNode;
+  icon?: React.ReactNode,
+  style?: CSSProperties | undefined;
 }
 
-const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape, icon, onClick }) => {
+const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape, icon, onClick, style }) => {
   return (
     <Form.Item>
       <Button
@@ -23,6 +24,7 @@ const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape
         shape={shape}
         icon={icon}
         onClick={onClick}
+        style={style}
       >
         {children}
       </Button>
