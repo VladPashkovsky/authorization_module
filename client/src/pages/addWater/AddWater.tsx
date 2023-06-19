@@ -8,17 +8,38 @@ import { useAddWaterMutation } from '../../app/services/api'
 import { Water } from '@prisma/client'
 import { Paths } from '../../paths'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
+import { message } from 'antd'
+
 
 const AddWater: FC = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
   const [addWater] = useAddWaterMutation()
+  const [messageApi, contextHolderMessage] = message.useMessage()
+
+  const addedNotification = () => {
+    messageApi.open({
+      content: 'The water successfully added',
+      className: 'custom-class',
+      duration: 4,
+    })
+  }
+
+  const navigateBack = () => {
+    navigate('/home')
+  }
+
+  const showNotification = () => {
+    setTimeout(addedNotification, 1000)
+    setTimeout(navigateBack, 3000)
+  }
 
   const addNewWater = async (data: Water) => {
     try {
       await addWater(data).unwrap()
-      navigate(`${Paths.status}/created`)
+      showNotification()
+      // navigate(`${Paths.status}/created`)
     } catch (e) {
       const ifError = isErrorWithMessage(e)
       if (ifError) {
@@ -35,15 +56,16 @@ const AddWater: FC = () => {
 
   return (
     <LayoutBasic>
-      <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px'}}>
+      {contextHolderMessage}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
         <WaterForm
           title='Add New Water'
           btnText='Add'
           onFinish={addNewWater}
+          goBack={() => navigate('/home')}
           error={error}
         />
       </div>
-
     </LayoutBasic>
   )
 }

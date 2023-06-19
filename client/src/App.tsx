@@ -14,7 +14,7 @@ const router = createBrowserRouter([
   { path: Paths.signup, element: <SignUp /> },
   { path: Paths.home, element: <Home />  },
   {path: Paths.waterAdd, element: <AddWater />},
-  {path: `${Paths.status}/:status`, element: <Status /> }
+  // {path: `${Paths.status}/:status`, element: <Status /> }
 ])
 
 function App() {
