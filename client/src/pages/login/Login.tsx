@@ -59,7 +59,7 @@ const Login: FC = () => {
     try {
       await sendLoginUser(currentUserData).unwrap()
       navigate('/home')
-    } catch (err: any) {
+    } catch (err) {
       const ifError = isErrorWithMessage(err)
       ifError && setError(err.data.message)
       errorMessage(error)

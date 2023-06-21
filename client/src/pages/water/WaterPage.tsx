@@ -4,8 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetWaterByIdQuery, useRemoveWaterMutation } from '../../app/services/api'
 import { useAppSelector } from '../../app/hooks'
 import { selectUser } from '../../features/auth/authSlice'
+import { Descriptions } from 'antd'
 
-const Water: FC = () => {
+
+const WaterPage: FC = () => {
   const [error, setError] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
@@ -14,11 +16,25 @@ const Water: FC = () => {
   const [removeWater] = useRemoveWaterMutation()
   const user = useAppSelector(selectUser)
 
+  // if (!data) {
+  //   navigate('/home')
+  // }
+
+  console.log(data)
+
   return (
     <LayoutBasic>
-      <h1> Water id {params.id} </h1>
+      <div style={{background: 'lightgray'}}>
+          <Descriptions title='INFORMATION' layout='vertical' bordered>
+            <Descriptions.Item label='WaterPage ID'>{params.id}</Descriptions.Item>
+
+            {/*<Descriptions.Item label='Brand'>{`${data!.brand}`}</Descriptions.Item>*/}
+
+            {/*<Descriptions.Item label='Price'>{`${data.price}`}</Descriptions.Item>*/}
+          </Descriptions>
+      </div>
     </LayoutBasic>
   )
 }
 
-export default Water
+export default WaterPage

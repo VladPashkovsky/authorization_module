@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { Button, Result, Row } from 'antd'
 
 const Statuses: Record<string, string> = {
-  created: 'Water added',
-  updated: 'Water updated',
-  deleted: 'Water deleted',
+  created: 'WaterPage added',
+  updated: 'WaterPage updated',
+  deleted: 'WaterPage deleted',
 }
 
 const Status: FC = () => {

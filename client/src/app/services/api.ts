@@ -33,7 +33,7 @@ export const apiAuth = createApi({
       invalidatesTags: ['Auth'],
     }),
     current: build.query<ResponseLoginData, void>({
-      query: () => ({ url: 'user/current' }),
+      query: () => ({ url: '/user/current' }),
       providesTags: result => ['Auth'],
     }),
   }),
@@ -51,23 +51,23 @@ export const apiWater = createApi({
   refetchOnMountOrArgChange: true,
   endpoints: (build) => ({
     getAllWaters: build.query<Water[], void>({
-      query: () => ({ url: 'water' }),
+      query: () => ({ url: '/water' }),
       providesTags: result => ['Water'],
     }),
     getWaterById: build.query<Water, string>({
-      query: (id) => ({ url: `water/:${id}` }),
+      query: (id) => ({ url: `/water/:${id}` }),
       providesTags: result => ['Water'],
     }),
     addWater: build.mutation<Water, Water>({
-      query: (water) => ({ url: `water/add`, method: 'POST', body: water }),
+      query: (water) => ({ url: `/water/add`, method: 'POST', body: water }),
       invalidatesTags: ['Water'],
     }),
     editWater: build.mutation<string, Water>({
-      query: (water) => ({ url: `water/edit/${water.id}`, method: 'PUT' }),
+      query: (water) => ({ url: `/water/edit/${water.id}`, method: 'PUT' }),
       invalidatesTags: ['Water'],
     }),
     removeWater: build.mutation<string, string>({
-      query: (id) => ({ url: `water/remove/${id}`, method: 'DELETE' }),
+      query: (id) => ({ url: `/water/remove/${id}`, method: 'DELETE' }),
       invalidatesTags: ['Water'],
     }),
   }),

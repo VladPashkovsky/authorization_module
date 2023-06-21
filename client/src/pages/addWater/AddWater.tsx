@@ -59,7 +59,7 @@ const AddWater: FC = () => {
       {contextHolderMessage}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
         <WaterForm
-          title='Add New Water'
+          title='Add New WaterPage'
           btnText='Add'
           onFinish={addNewWater}
           goBack={() => navigate('/home')}

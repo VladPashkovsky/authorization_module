@@ -30,7 +30,7 @@ const Home: FC = () => {
   const [bordered, setBordered] = useState(false);
   // const [loading, setLoading] = useState(false);
   const [size, setSize] = useState<SizeType>('large');
-  // const [expandable, setExpandable] = useState<ExpandableConfig<Water> | undefined>(
+  // const [expandable, setExpandable] = useState<ExpandableConfig<WaterPage> | undefined>(
   //   defaultExpandable,
   // );
   // const [showTitle, setShowTitle] = useState(false);

@@ -10,7 +10,7 @@ DROP TABLE "Employee";
 PRAGMA foreign_keys=on;
 
 -- CreateTable
-CREATE TABLE "Water" (
+CREATE TABLE "WaterPage" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "brand" TEXT NOT NULL,
     "description" TEXT NOT NULL,
