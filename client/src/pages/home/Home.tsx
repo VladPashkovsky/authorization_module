@@ -26,6 +26,7 @@ const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
+  console.log(user)
 
   const [bordered, setBordered] = useState(false);
   // const [loading, setLoading] = useState(false);
