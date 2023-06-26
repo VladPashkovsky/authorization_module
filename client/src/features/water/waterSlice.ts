@@ -27,4 +27,4 @@ export const waterSlice = createSlice({
 
 export default waterSlice.reducer
 
-export const selectWater = (state: RootState) => state.waterReducer.waters
+// export const selectWater = (state: RootState) => state.waterReducer.waters

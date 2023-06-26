@@ -2,7 +2,7 @@ import React, { FC, JSX, useEffect } from 'react'
 import { useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {useAppSelector} from '../app/hooks'
-import { selectIsAuth, selectUser } from '../features/auth/authSlice'
+// import { selectIsAuth, selectUser } from '../features/auth/authSlice'
 
 interface RequireAuthProps {
   children: JSX.Element
@@ -11,7 +11,8 @@ interface RequireAuthProps {
 const RequireAuth: FC<RequireAuthProps> = ({children}) => {
   const location = useLocation()
   // const user = useSelector(selectUser)
-  const user = useAppSelector(selectUser)
+  // const user = useAppSelector(selectUser)
+  const {user} = useAppSelector(state => state.authReducer)
   const navigate = useNavigate()
 
   if (!user) {

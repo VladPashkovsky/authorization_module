@@ -11,7 +11,7 @@ import { Water } from '@prisma/client'
 import { useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import {useAppSelector} from '../../app/hooks'
-import {selectUser} from '../../features/auth/authSlice'
+// import {selectUser} from '../../features/auth/authSlice'
 
 
 // interface DataType {
@@ -25,8 +25,8 @@ import {selectUser} from '../../features/auth/authSlice'
 const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
-  const user = useAppSelector(selectUser)
-  console.log(user)
+  // const user = useAppSelector(selectUser)
+  const {user} = useAppSelector(state => state.authReducer)
 
   const [bordered, setBordered] = useState(false);
   // const [loading, setLoading] = useState(false);

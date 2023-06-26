@@ -3,7 +3,7 @@ import LayoutBasic from '../../components/layoutBasic/LayoutBasic'
 import WaterForm from '../../components/waterForm/WaterForm'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
-import { selectUser } from '../../features/auth/authSlice'
+// import { selectUser } from '../../features/auth/authSlice'
 import { useAddWaterMutation } from '../../app/services/api'
 import { Water } from '@prisma/client'
 import { Paths } from '../../paths'
@@ -14,7 +14,8 @@ import { message } from 'antd'
 const AddWater: FC = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
-  const user = useAppSelector(selectUser)
+  // const user = useAppSelector(selectUser)
+  const {user} = useAppSelector(state => state.authReducer)
   const [addWater] = useAddWaterMutation()
   const [messageApi, contextHolderMessage] = message.useMessage()
 

@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import './headerTransparent.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { logout, selectUser } from '../../features/auth/authSlice'
+import { logout } from '../../features/auth/authSlice'
 
 const HeaderTransparent: FC = () => {
-  const user = useAppSelector(selectUser)
+  // const user = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

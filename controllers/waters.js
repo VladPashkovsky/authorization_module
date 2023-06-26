@@ -10,8 +10,8 @@ const getAllWaters = async (req, res, next) => {
 }
 
 const getWaterById = async (req, res, next) => {
+  const { id } = req.params
   try {
-    const { id } = req.params
     const water = await prisma.water.findUnique({
       where: { id },
     })
