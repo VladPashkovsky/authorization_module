@@ -18,11 +18,9 @@ const WaterPage: FC = () => {
   const {user} = useAppSelector(state => state.authReducer)
   const {waters} = useAppSelector(state => state.waterReducer)
 
-
   // if (!data) {
   //   navigate('/home')
   // }
-
 
   return (
     <LayoutBasic>

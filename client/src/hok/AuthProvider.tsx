@@ -6,14 +6,11 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const { isLoading,  } = useCurrentQuery()
-  // if (isLoading) {
-  //   return <span>Loading...</span>
-  // }
+  const { isLoading, data } = useCurrentQuery()
 
   return (
     children
-)
+  )
 }
 
 export default AuthProvider

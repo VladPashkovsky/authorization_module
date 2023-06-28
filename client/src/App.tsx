@@ -13,10 +13,10 @@ import WaterPage from './pages/water/WaterPage'
 const router = createBrowserRouter([
   { path: Paths.login, element: <Login /> },
   { path: Paths.signup, element: <SignUp /> },
-  { path: Paths.home, element: <Home />  },
-  {path: Paths.waterAdd, element: <AddWater />},
+  { path: Paths.home, element: <RequireAuth children={<Home />} /> },
+  { path: Paths.waterAdd, element: <RequireAuth children={<AddWater />} /> },
   // {path: `${Paths.status}/:status`, element: <Status /> }
-  {path: `${Paths.water}/:id`, element: <WaterPage />}
+  { path: `${Paths.water}/:id`, element: <RequireAuth children={<WaterPage />} /> },
 ])
 
 function App() {

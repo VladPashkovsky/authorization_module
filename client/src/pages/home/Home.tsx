@@ -227,11 +227,11 @@ const Home: FC = () => {
       navigate(Paths.waterAdd)
   }
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/')
-    }
-  }, [navigate, user])
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate('/')
+  //   }
+  // }, [navigate, user])
 
   return (
     <LayoutBasic>

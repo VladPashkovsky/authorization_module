@@ -51,9 +51,9 @@ const AddWater: FC = () => {
     }
   }
 
-  useEffect(() => {
-    !user && navigate('/')
-  }, [navigate, user])
+  // useEffect(() => {
+  //   !user && navigate('/')
+  // }, [navigate, user])
 
   return (
     <LayoutBasic>
