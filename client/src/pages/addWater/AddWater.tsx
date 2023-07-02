@@ -9,7 +9,7 @@ import { Water } from '@prisma/client'
 import { Paths } from '../../paths'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 import { message } from 'antd'
-import {useTransition, animated} from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 
 
 const AddWater: FC = () => {
@@ -17,7 +17,7 @@ const AddWater: FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
   // const user = useAppSelector(selectUser)
-  const {user} = useAppSelector(state => state.authReducer)
+  const { user } = useAppSelector(state => state.authReducer)
   const [addWater] = useAddWaterMutation()
   const [messageApi, contextHolderMessage] = message.useMessage()
 
@@ -58,13 +58,13 @@ const AddWater: FC = () => {
   // }, [navigate, user])
 
   const transitions = useTransition(location, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 1 },
-    config: {duration: 500}
+    from: { opacity: 0, transform: 'translateX(100%)' },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: { opacity: 0, transform: 'translateX(-100%)' },
+    config: { duration: 500 },
   })
 
-  return ( transitions((style) =>
+  return (transitions((style) =>
     <LayoutBasic>
       {contextHolderMessage}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
@@ -78,7 +78,7 @@ const AddWater: FC = () => {
           />
         </animated.div>
       </div>
-    </LayoutBasic>
+    </LayoutBasic>,
   ))
 }
 

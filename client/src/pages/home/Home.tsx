@@ -8,10 +8,11 @@ import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { ExpandableConfig, TableRowSelection } from 'antd/es/table/interface';
 import { useCurrentQuery, useGetAllWatersQuery } from '../../app/services/api'
 import { Water } from '@prisma/client'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import {useAppSelector} from '../../app/hooks'
 // import {selectUser} from '../../features/auth/authSlice'
+import {useTransition, animated} from 'react-spring'
 
 
 // interface DataType {
@@ -25,8 +26,16 @@ import {useAppSelector} from '../../app/hooks'
 const Home: FC = () => {
   const { data, isLoading } = useGetAllWatersQuery()
   const navigate = useNavigate()
+  const location = useLocation()
   // const user = useAppSelector(selectUser)
   const {user} = useAppSelector(state => state.authReducer)
+
+  const transitions = useTransition(location, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: {duration: 500}
+  })
 
   const [bordered, setBordered] = useState(false);
   // const [loading, setLoading] = useState(false);
@@ -233,8 +242,9 @@ const Home: FC = () => {
   //   }
   // }, [navigate, user])
 
-  return (
+  return ( transitions((style) =>
     <LayoutBasic>
+      <animated.div style={style}>
         <Form
           layout="inline"
           className="components-table-demo-control-bar"
@@ -346,7 +356,7 @@ const Home: FC = () => {
                }}
                scroll={scroll}
         />
-
+      </animated.div>
 
         {/*<Table style={{opacity: '0.85'}}*/}
         {/*  loading={isLoading}*/}
@@ -361,7 +371,7 @@ const Home: FC = () => {
 
     </LayoutBasic>
 
-  )
+  ))
 }
 
 export default Home
