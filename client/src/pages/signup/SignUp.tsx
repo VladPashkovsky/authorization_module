@@ -7,7 +7,7 @@ const SignUp: FC = () => {
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputEmailValue, setInputEmailValue] = useState('')
   const [inputPassValue, setInputPassValue] = useState('')
-
+  
   return (
     <LayoutEnter>
       <Registration

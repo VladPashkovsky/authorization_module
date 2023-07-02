@@ -26,10 +26,10 @@ const HeaderTransparent: FC = () => {
           </Link>
         </div>
         <ul>
-          <Link to={Paths.login} style={{ textDecoration: 'none' }}>
+          <Link to={Paths.home} style={{ textDecoration: 'none' }}>
             <li><span> Something </span></li>
           </Link>
-          <li onClick={logOutClick}><span>Logout </span></li>
+          <li onClick={logOutClick}><span>Logout</span></li>
         </ul>
       </nav>
       <section className='sec1'></section>

@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import SignIn from '../../components/signin/SignIn'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
@@ -7,6 +7,7 @@ import { useLoginMutation, UserDataLogin } from '../../app/services/api'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 import { notification, message } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import {useTransition, animated} from 'react-spring'
 
 
 const Login: FC = () => {
@@ -15,6 +16,15 @@ const Login: FC = () => {
   const [error, setError] = useState('')
   const [sendLoginUser, loginUserResult] = useLoginMutation()
   const navigate = useNavigate()
+  const location = useLocation()
+
+
+  const transitions = useTransition(location, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 1 },
+    config: {duration: 500}
+  })
 
   const [api, contextHolder] = notification.useNotification()
   const [messageApi, contextHolderMessage] = message.useMessage()
@@ -66,25 +76,31 @@ const Login: FC = () => {
     }
   }
 
-  return (
+  return ( transitions((style) =>
     <LayoutEnter>
       {contextHolder}
       {contextHolderMessage}
-      <SignIn
-        valueEmail={inputEmailValue}
-        onChangeEmail={(event) => setInputEmailValue(event.target.value)}
-        valuePass={inputPassValue}
-        onChangePass={(event) => setInputPassValue(event.target.value)}
-        linkTo={Paths.signup}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            sendLoginData(currentUserData)
-          }
-        }}
-        onClick={sendLoginData}
-      />
+
+      <animated.div style={style}>
+        <SignIn
+          valueEmail={inputEmailValue}
+          onChangeEmail={(event) => setInputEmailValue(event.target.value)}
+          valuePass={inputPassValue}
+          onChangePass={(event) => setInputPassValue(event.target.value)}
+          linkTo={Paths.signup}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              sendLoginData(currentUserData)
+            }
+          }}
+          onClick={sendLoginData}
+        />
+      </animated.div>
+
+
+
     </LayoutEnter>
-  )
+  ))
 }
 
 export default Login
