@@ -3,6 +3,16 @@ import authReducer from '../features/auth/authSlice'
 import waterReducer from '../features/water/waterSlice'
 import { apiAuth, apiWater } from './services/api'
 import { authMiddleware } from '../middleware/authMiddleware'
+import {
+  persistStore, persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 const rootReducer = combineReducers({
   authReducer,
@@ -11,19 +21,42 @@ const rootReducer = combineReducers({
   [apiWater.reducerPath]: apiWater.reducer,
 })
 
-export const setupStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
-        .concat(apiAuth.middleware, apiWater.middleware)
-        .prepend(authMiddleware.middleware)
-  })
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: [apiAuth.reducerPath, apiWater.reducerPath],
 }
 
-export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+// export const setupStore = () => {
+//   return configureStore({
+//     reducer: rootReducer,
+//     middleware: (getDefaultMiddleware) =>
+//       getDefaultMiddleware()
+//         .concat(apiAuth.middleware, apiWater.middleware)
+//         .prepend(authMiddleware.middleware)
+//   })
+// }
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    })
+      .concat(apiAuth.middleware, apiWater.middleware)
+      .prepend(authMiddleware.middleware),
+})
+
+export const persistor = persistStore(store)
+export default store
+
+// export type RootState = ReturnType<typeof rootReducer>
+// export type AppStore = ReturnType<typeof setupStore>
+// export type AppDispatch = AppStore['dispatch']
 
 // export const store = configureStore({
 //   reducer: {
@@ -38,9 +71,9 @@ export type AppDispatch = AppStore['dispatch']
 //       .prepend(authMiddleware.middleware),
 // })
 
-// export type AppDispatch = typeof store.dispatch;
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
-//   RootState,
-//   unknown,
-//   Action<string>>;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
+  RootState,
+  unknown,
+  Action<string>>;
