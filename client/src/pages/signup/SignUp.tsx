@@ -3,11 +3,13 @@ import Registration from '../../components/registration/Registration'
 import LayoutEnter from '../../components/layoutEnter/LayoutEnter'
 import { Paths } from '../../paths'
 
+
 const SignUp: FC = () => {
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputEmailValue, setInputEmailValue] = useState('')
   const [inputPassValue, setInputPassValue] = useState('')
-  
+
+
   return (
     <LayoutEnter>
       <Registration

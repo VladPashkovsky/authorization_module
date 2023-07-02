@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import LayoutBasic from '../../components/layoutBasic/LayoutBasic'
 import WaterForm from '../../components/waterForm/WaterForm'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
 // import { selectUser } from '../../features/auth/authSlice'
 import { useAddWaterMutation } from '../../app/services/api'
@@ -9,11 +9,13 @@ import { Water } from '@prisma/client'
 import { Paths } from '../../paths'
 import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 import { message } from 'antd'
+import {useTransition, animated} from 'react-spring'
 
 
 const AddWater: FC = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
   // const user = useAppSelector(selectUser)
   const {user} = useAppSelector(state => state.authReducer)
   const [addWater] = useAddWaterMutation()
@@ -55,20 +57,29 @@ const AddWater: FC = () => {
   //   !user && navigate('/')
   // }, [navigate, user])
 
-  return (
+  const transitions = useTransition(location, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 1 },
+    config: {duration: 500}
+  })
+
+  return ( transitions((style) =>
     <LayoutBasic>
       {contextHolderMessage}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-        <WaterForm
-          title='Add New WaterPage'
-          btnText='Add'
-          onFinish={addNewWater}
-          goBack={() => navigate('/home')}
-          error={error}
-        />
+        <animated.div style={style}>
+          <WaterForm
+            title='Add New WaterPage'
+            btnText='Add'
+            onFinish={addNewWater}
+            goBack={() => navigate('/home')}
+            error={error}
+          />
+        </animated.div>
       </div>
     </LayoutBasic>
-  )
+  ))
 }
 
 export default AddWater
