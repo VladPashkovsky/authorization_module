@@ -25,11 +25,11 @@ const WaterPage: FC = () => {
           <Descriptions title='INFORMATION' layout='vertical' bordered>
             <Descriptions.Item label='WaterPage ID'>{params.id}</Descriptions.Item>
             <Descriptions.Item label='Brand'>{data && data.brand}</Descriptions.Item>
-            <Descriptions.Item label='Price'>{data && data.description}</Descriptions.Item>
-            <Descriptions.Item label='Price'>{data && data.details}</Descriptions.Item>
-            <Descriptions.Item label='Price'>{data && data.price}</Descriptions.Item>
-            <Descriptions.Item label='Price'>{data && data.imageUrl}</Descriptions.Item>
-            <Descriptions.Item label='Price'>{data && data.userId}</Descriptions.Item>
+            <Descriptions.Item label='Description'>{data && data.description}</Descriptions.Item>
+            <Descriptions.Item label='Details'>{data && data.details}</Descriptions.Item>
+            {/*<Descriptions.Item label='Price'>{data && data.price}</Descriptions.Item>*/}
+            {/*<Descriptions.Item label='Image'>{data && data.imageUrl}</Descriptions.Item>*/}
+            {/*<Descriptions.Item label='User'>{data && data.userId}</Descriptions.Item>*/}
           </Descriptions>
       </div>
 

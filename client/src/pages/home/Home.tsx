@@ -78,6 +78,7 @@ const Home: FC = () => {
       title: 'BRAND',
       dataIndex: 'brand',
       key: 'brand',
+      width: '150px',
       // sorter: true,
       // filters: [
       //   {text: `text`, value: `value`},
@@ -90,34 +91,39 @@ const Home: FC = () => {
       dataIndex: 'description',
       key: 'description'
     },
-    {
-      title: 'DETAILS',
-      dataIndex: 'details',
-      key: 'details'
-    },
+    // {
+    //   title: 'DETAILS',
+    //   dataIndex: 'details',
+    //   key: 'details'
+    // },
     {
       title: 'PRICE',
       dataIndex: 'price',
-      key: 'price'
+      key: 'price',
+      width: '80px'
     },
     {
       title: 'IMAGE',
       // dataIndex: 'imageUrl',
       key: 'imageUrl',
+      // width: '40px',
       render: () => (
-        <Space size='middle'>
-          <a href='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg'>Image</a>
+        <Space size='small'>
+          {/*<a href='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg'>Image</a>*/}
+          <img src='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg' width='80px'/>
         </Space>
       ),
     },
     {
       title: 'USER',
       dataIndex: 'user',
-      key: 'user'
+      key: 'user',
+      width: '150px'
     },
     {
       title: 'Action',
       key: 'action',
+      width: '150px',
       render: () => (
         <Space size="middle">
           <a>Delete</a>
