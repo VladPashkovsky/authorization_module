@@ -55,7 +55,7 @@ export const apiWater = createApi({
       providesTags: result => ['Water'],
     }),
     getWaterById: build.query<Water, string>({
-      query: (id) => ({ url: `/water/:${id}` }),
+      query: (id) => ({ url: `/water/${id}` }),
       providesTags: result => ['Water'],
     }),
     addWater: build.mutation<Water, Water>({
