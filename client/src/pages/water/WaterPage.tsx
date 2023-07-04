@@ -21,18 +21,17 @@ const WaterPage: FC = () => {
 
   return (
     <LayoutBasic>
-      <div style={{background: 'lightgray'}}>
+      <div style={{background: 'lightgray', opacity: '0.95', width: '80%', margin: '20px'}}>
           <Descriptions title='INFORMATION' layout='vertical' bordered>
-            <Descriptions.Item label='WaterPage ID'>{params.id}</Descriptions.Item>
-            <Descriptions.Item label='Brand'>{data && data.brand}</Descriptions.Item>
+            <Descriptions.Item label='WaterPage ID' >{params.id}</Descriptions.Item>
+            <Descriptions.Item label='Brand' >{data && data.brand}</Descriptions.Item>
             <Descriptions.Item label='Description'>{data && data.description}</Descriptions.Item>
             <Descriptions.Item label='Details'>{data && data.details}</Descriptions.Item>
-            {/*<Descriptions.Item label='Price'>{data && data.price}</Descriptions.Item>*/}
-            {/*<Descriptions.Item label='Image'>{data && data.imageUrl}</Descriptions.Item>*/}
-            {/*<Descriptions.Item label='User'>{data && data.userId}</Descriptions.Item>*/}
+            <Descriptions.Item label='Price'>{data && data.price}</Descriptions.Item>
+            <Descriptions.Item label='Image'> {<img src={data && data.imageUrl} alt='' style={{height: '30vh'}} />} </Descriptions.Item>
+            <Descriptions.Item label='User'>{data && data.userId}</Descriptions.Item>
           </Descriptions>
       </div>
-
     </LayoutBasic>
   )
 }

@@ -8,7 +8,7 @@ import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { ExpandableConfig, TableRowSelection } from 'antd/es/table/interface';
 import { useCurrentQuery, useGetAllWatersQuery } from '../../app/services/api'
 import { Water } from '@prisma/client'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Paths } from '../../paths'
 import {useAppSelector} from '../../app/hooks'
 // import {selectUser} from '../../features/auth/authSlice'
@@ -24,11 +24,12 @@ import {useTransition, animated} from 'react-spring'
 // }
 
 const Home: FC = () => {
-  const { data, isLoading } = useGetAllWatersQuery()
+  const {data, isLoading} = useGetAllWatersQuery()
   const navigate = useNavigate()
   const location = useLocation()
   // const user = useAppSelector(selectUser)
   const {user} = useAppSelector(state => state.authReducer)
+
 
   const transitions = useTransition(location, {
     from: { opacity: 0 },
@@ -36,6 +37,7 @@ const Home: FC = () => {
     leave: { opacity: 0 },
     config: {duration: 500}
   })
+
 
   const [bordered, setBordered] = useState(false);
   // const [loading, setLoading] = useState(false);
@@ -78,7 +80,7 @@ const Home: FC = () => {
       title: 'BRAND',
       dataIndex: 'brand',
       key: 'brand',
-      width: '150px',
+      width: '130px',
       // sorter: true,
       // filters: [
       //   {text: `text`, value: `value`},
@@ -110,7 +112,7 @@ const Home: FC = () => {
       render: () => (
         <Space size='small'>
           {/*<a href='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg'>Image</a>*/}
-          <img src='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg' width='80px'/>
+          <img src='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg' alt='' width='80px'/>
         </Space>
       ),
     },
@@ -123,10 +125,10 @@ const Home: FC = () => {
     {
       title: 'Action',
       key: 'action',
-      width: '150px',
+      width: '200px',
       render: () => (
         <Space size="middle">
-          <a>Delete</a>
+          <a>Details</a>
         </Space>
       ),
     },
