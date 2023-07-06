@@ -1,0 +1,23 @@
+.waterForm_basic {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.waterForm_container {
+    background: lightgray;
+    opacity: 0.95;
+    width: 90%;
+    margin-top: 50px;
+    display: flex;
+}
+
+.button_container {
+    width: 300px;
+    background: lightgray;
+}
+
+.all_buttons {
+    margin-left: 40px;
+    margin-top: 62px;
+}
