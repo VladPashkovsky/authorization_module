@@ -11,9 +11,10 @@ type Props = {
   shape?: 'default' | 'circle' | 'round' | undefined,
   icon?: React.ReactNode,
   style?: CSSProperties | undefined;
+  disabled?: boolean | undefined
 }
 
-const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape, icon, onClick, style }) => {
+const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape, icon, onClick, style, disabled }) => {
   return (
     <Form.Item>
       <Button
@@ -25,6 +26,7 @@ const ButtonOne: FC<Props> = ({ children, htmlType, type, danger, loading, shape
         icon={icon}
         onClick={onClick}
         style={style}
+        disabled={disabled}
       >
         {children}
       </Button>

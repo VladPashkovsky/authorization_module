@@ -7,6 +7,7 @@ import { useAppSelector } from '../../app/hooks'
 import { Descriptions } from 'antd'
 import ButtonOne from '../../components/buttons/ButtonOne'
 import './waterPage.css'
+import { Paths } from '../../paths'
 
 
 const WaterPage: FC = () => {
@@ -19,6 +20,17 @@ const WaterPage: FC = () => {
   const { user } = useAppSelector(state => state.authReducer)
   const { waters } = useAppSelector(state => state.waterReducer)
 
+  const goBack = () => {
+    navigate(Paths.home)
+  }
+
+  const goEdit = () => {
+    data && navigate(`${Paths.waterEdit}/${data.id}`)
+  }
+
+  const goDelete = () => {
+
+  }
 
   return (
     <LayoutBasic>
@@ -35,17 +47,34 @@ const WaterPage: FC = () => {
             </Descriptions.Item>
             <Descriptions.Item label='User'>{data && data.userId}</Descriptions.Item>
           </Descriptions>
-          <div className='button_container'>
+          <div className='buttons_container'>
             <div className='all_buttons'>
               <div>
-                <ButtonOne>Back</ButtonOne>
+                <ButtonOne onClick={goBack}>Back</ButtonOne>
               </div>
-              <div>
-                <ButtonOne>Edit</ButtonOne>
-              </div>
-              <div>
-                <ButtonOne>Delete</ButtonOne>
-              </div>
+
+              { (user && user.id) === (data && data.userId)
+                ?
+                (<div>
+                  <ButtonOne onClick={goEdit}>Edit</ButtonOne>
+                </div>)
+                :
+                (<div>
+                  <ButtonOne disabled={true} >Edit</ButtonOne>
+                </div>)
+              }
+
+              { (user && user.id) === (data && data.userId)
+                ?
+                <div>
+                  <ButtonOne onClick={goDelete}>Delete</ButtonOne>
+                </div>
+                :
+                <div>
+                  <ButtonOne disabled={true}>Delete</ButtonOne>
+                </div>
+              }
+
             </div>
           </div>
         </div>
