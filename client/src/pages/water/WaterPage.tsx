@@ -3,11 +3,13 @@ import LayoutBasic from '../../components/layoutBasic/LayoutBasic'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetWaterByIdQuery, useRemoveWaterMutation } from '../../app/services/api'
 import { useAppSelector } from '../../app/hooks'
-// import { selectUser } from '../../features/auth/authSlice'
-import { Descriptions } from 'antd'
+import { Descriptions, Modal } from 'antd'
 import ButtonOne from '../../components/buttons/ButtonOne'
 import './waterPage.css'
 import { Paths } from '../../paths'
+import ErrorMessage from '../../components/errorMessage/ErrorMessage'
+import { message } from 'antd'
+import { isErrorWithMessage } from '../../utils/isErrorWithMessage'
 
 
 const WaterPage: FC = () => {
@@ -15,28 +17,61 @@ const WaterPage: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
   const params = useParams<{ id: string }>()
-  const { data, isLoading } = useGetWaterByIdQuery(params.id || '')
+  const { data } = useGetWaterByIdQuery(params.id || '')
   const [removeWater] = useRemoveWaterMutation()
   const { user } = useAppSelector(state => state.authReducer)
-  const { waters } = useAppSelector(state => state.waterReducer)
+  const [messageApi, contextHolderMessage] = message.useMessage()
 
-  const goBack = () => {
-    navigate(Paths.home)
+  const addedNotification = () => {
+    messageApi.open({
+      content: 'The water successfully deleted',
+      className: 'custom-class',
+      duration: 4,
+    })
   }
 
   const goEdit = () => {
     data && navigate(`${Paths.waterEdit}/${data.id}`)
   }
 
-  const goDelete = () => {
+  const goBack = () => {
+    navigate(Paths.home)
+  }
 
+  const showNotification = () => {
+    setTimeout(addedNotification, 1000)
+    setTimeout(goBack, 3000)
+  }
+
+  const goDelete = async () => {
+    try {
+      await (data && removeWater(data.id).unwrap())
+      setIsModalOpen(false)
+      showNotification()
+    } catch (e) {
+      const ifError = isErrorWithMessage(e)
+      if (ifError) {
+        setError(e.data.message)
+      } else {
+        setError('Unknown error')
+      }
+    }
+  }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const onCancel = () => {
+    setIsModalOpen(false)
   }
 
   return (
     <LayoutBasic>
+      {contextHolderMessage}
       <div className='waterForm_basic'>
         <div className='waterForm_container'>
-          <Descriptions style={{margin: '20px'}} title='INFORMATION' layout='vertical' bordered>
+          <Descriptions style={{ margin: '20px' }} title='INFORMATION' layout='vertical' bordered>
             <Descriptions.Item label='WaterPage ID'>{params.id}</Descriptions.Item>
             <Descriptions.Item label='Brand'>{data && data.brand}</Descriptions.Item>
             <Descriptions.Item label='Description'>{data && data.description}</Descriptions.Item>
@@ -53,21 +88,21 @@ const WaterPage: FC = () => {
                 <ButtonOne onClick={goBack}>Back</ButtonOne>
               </div>
 
-              { (user && user.id) === (data && data.userId)
+              {(user && user.id) === (data && data.userId)
                 ?
                 (<div>
                   <ButtonOne onClick={goEdit}>Edit</ButtonOne>
                 </div>)
                 :
                 (<div>
-                  <ButtonOne disabled={true} >Edit</ButtonOne>
+                  <ButtonOne disabled={true}>Edit</ButtonOne>
                 </div>)
               }
 
-              { (user && user.id) === (data && data.userId)
+              {(user && user.id) === (data && data.userId)
                 ?
                 <div>
-                  <ButtonOne onClick={goDelete}>Delete</ButtonOne>
+                  <ButtonOne onClick={openModal}>Delete</ButtonOne>
                 </div>
                 :
                 <div>
@@ -75,6 +110,25 @@ const WaterPage: FC = () => {
                 </div>
               }
 
+              <ErrorMessage message={error} />
+
+              <Modal
+                title='DELETE'
+                open={isModalOpen}
+                onOk={goDelete}
+                onCancel={onCancel}
+                okText='OK'
+                cancelText='Cancel'
+                style={{marginTop: '20vh'}}
+              >
+                <div style={{display: 'flex'}}>
+                  <div style={{margin: 'auto', fontWeight: 'bold'}}>
+                    <p style={{textAlign: 'center'}}> {`The Water with id:`} </p>
+                    <p style={{textAlign: 'center', fontSize: 'large'}}> {`${data && data.id}`} </p>
+                    <p style={{textAlign: 'center'}}> {`will be deleted`} </p>
+                  </div>
+                </div>
+              </Modal>
             </div>
           </div>
         </div>
