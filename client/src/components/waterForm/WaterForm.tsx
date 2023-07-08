@@ -7,7 +7,7 @@ import ButtonOne from '../buttons/ButtonOne'
 
 interface WaterFormProps<T> {
   onFinish: (value: T) => void,
-  goBack: () => void,
+  goBack?: () => void,
   btnText: string,
   title: string,
   error?: string,

@@ -9,6 +9,8 @@ import RequireAuth from './hok/RequireAuth'
 import AddWater from './pages/addWater/AddWater'
 import Status from './pages/status/Status'
 import WaterPage from './pages/water/WaterPage'
+import WaterEdit from './pages/waterEdit/WaterEdit'
+
 
 const router = createBrowserRouter([
   { path: Paths.login, element: <Login /> },
@@ -17,6 +19,7 @@ const router = createBrowserRouter([
   { path: Paths.waterAdd, element: <RequireAuth children={<AddWater />} /> },
   // {path: `${Paths.status}/:status`, element: <Status /> }
   { path: `${Paths.water}/:id`, element: <RequireAuth children={<WaterPage />} /> },
+  {path: `${Paths.waterEdit}/:id`, element: <RequireAuth children={<WaterEdit/>} />}
 ])
 
 function App() {

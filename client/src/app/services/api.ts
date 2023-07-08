@@ -63,7 +63,7 @@ export const apiWater = createApi({
       invalidatesTags: ['Water'],
     }),
     editWater: build.mutation<string, Water>({
-      query: (water) => ({ url: `/water/edit/${water.id}`, method: 'PUT' }),
+      query: (water) => ({ url: `/water/edit/${water.id}`, method: 'PUT', body: water }),
       invalidatesTags: ['Water'],
     }),
     removeWater: build.mutation<string, string>({
