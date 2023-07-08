@@ -14,6 +14,7 @@ import { useTransition, animated } from 'react-spring'
 
 const AddWater: FC = () => {
   const [error, setError] = useState('')
+  const [isDisabled, setDisabled] = useState(false);
   const navigate = useNavigate()
   const location = useLocation()
   // const user = useAppSelector(selectUser)
@@ -41,6 +42,7 @@ const AddWater: FC = () => {
   const addNewWater = async (data: Water) => {
     try {
       await addWater(data).unwrap()
+      setDisabled(true)
       showNotification()
       // navigate(`${Paths.status}/created`)
     } catch (e) {
@@ -75,6 +77,7 @@ const AddWater: FC = () => {
             onFinish={addNewWater}
             goBack={() => navigate('/home')}
             error={error}
+            disabled={isDisabled}
           />
         </animated.div>
       </div>
