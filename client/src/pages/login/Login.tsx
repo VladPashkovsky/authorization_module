@@ -80,7 +80,6 @@ const Login: FC = () => {
     <LayoutEnter>
       {contextHolder}
       {contextHolderMessage}
-
       <animated.div style={style}>
         <SignIn
           valueEmail={inputEmailValue}
@@ -96,9 +95,6 @@ const Login: FC = () => {
           onClick={sendLoginData}
         />
       </animated.div>
-
-
-
     </LayoutEnter>
   ))
 }
