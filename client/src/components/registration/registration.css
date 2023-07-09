@@ -207,6 +207,13 @@
     padding: 10px;
 }
 
+/*.content_reg .form .inputBox input.active {*/
+/*    background: #9d9d9d;*/
+/*    color: #ffffff;*/
+/*    cursor: none;*/
+/*    padding: 10px;*/
+/*}*/
+
 .content_reg .form .inputBox input[type='submit']:hover {
     background: #333;
 }

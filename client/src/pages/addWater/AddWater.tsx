@@ -26,6 +26,7 @@ const AddWater: FC = () => {
     messageApi.open({
       content: 'The water successfully added',
       className: 'custom-class',
+      key: 'addwater',
       duration: 4,
     })
   }
