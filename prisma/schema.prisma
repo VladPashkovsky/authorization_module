@@ -15,10 +15,10 @@ model User {
     email           String  @unique
     password        String
     name            String
-    createdProduct WaterPage[]
+    createdProduct Water[]
 }
 
-model WaterPage {
+model Water {
     id          String @id @default(uuid())
     brand       String
     description String

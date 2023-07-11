@@ -106,13 +106,11 @@ const Home: FC = () => {
     },
     {
       title: 'IMAGE',
-      // dataIndex: 'imageUrl',
+      dataIndex: 'imageUrl',
       key: 'imageUrl',
-      // width: '40px',
-      render: () => (
+      render: (value, record, index) => (
         <Space size='small'>
-          {/*<a href='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg'>Image</a>*/}
-          <img src='https://www.otlichnye-tseny.ru/upload/iblock/4a9/z93vg1k5c17uuin57cw3r9ehbkeklwdv.jpg' alt='' width='80px'/>
+          <img style={{width: '100px', height: '100px'}} src={record.imageUrl} alt=''/>
         </Space>
       ),
     },
