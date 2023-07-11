@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Paths } from '../../paths'
 import './headerTransparent.css'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { useAppDispatch } from '../../app/hooks'
 import { logout } from '../../features/auth/authSlice'
 
 const HeaderTransparent: FC = () => {
-  // const user = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const logOutClick = () => {
     dispatch(logout())
@@ -16,19 +16,22 @@ const HeaderTransparent: FC = () => {
     navigate('/')
   }
 
+  const goHome = () => {
+    if (location.pathname !== '/home') {
+      navigate(Paths.home)
+    }
+  }
 
   return (
     <div id='container_header'>
       <nav>
-        <div className='brand'>
-          <Link to={Paths.home} style={{ textDecoration: 'none' }}>
+        <button className='brand' onClick={goHome}>
             <h2>Water Database</h2>
-          </Link>
-        </div>
+        </button>
         <ul>
-          <Link to={Paths.home} style={{ textDecoration: 'none' }}>
-            <li><span> Something </span></li>
-          </Link>
+          {/*<Link to={Paths.home} style={{ textDecoration: 'none' }}>*/}
+          {/*  <li><span> Something </span></li>*/}
+          {/*</Link>*/}
           <li onClick={logOutClick}><span>Logout</span></li>
         </ul>
       </nav>

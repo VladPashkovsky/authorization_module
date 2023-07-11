@@ -27,6 +27,8 @@ nav .brand {
     height: 100%;
     line-height: 70px;
     display: flex;
+    background: none;
+    border: none;
 }
 
 nav .brand h2 {
