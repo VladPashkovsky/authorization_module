@@ -102,7 +102,8 @@ const WaterPage: FC = () => {
               {(user && user.id) === (data && data.userId)
                 ?
                 <div>
-                  <ButtonOne onClick={openModal}>Delete</ButtonOne>
+                  <ButtonOne style={{ paddingRight: '8px', paddingLeft: '8px' }}
+                             onClick={openModal}>Delete</ButtonOne>
                 </div>
                 :
                 <div>
@@ -119,13 +120,13 @@ const WaterPage: FC = () => {
                 onCancel={onCancel}
                 okText='OK'
                 cancelText='Cancel'
-                style={{marginTop: '20vh'}}
+                style={{ marginTop: '20vh' }}
               >
-                <div style={{display: 'flex'}}>
-                  <div style={{margin: 'auto', fontWeight: 'bold'}}>
-                    <p style={{textAlign: 'center'}}> {`The Water with id:`} </p>
-                    <p style={{textAlign: 'center', fontSize: 'large'}}> {`${data && data.id}`} </p>
-                    <p style={{textAlign: 'center'}}> {`will be deleted`} </p>
+                <div style={{ display: 'flex' }}>
+                  <div style={{ margin: 'auto', fontWeight: 'bold' }}>
+                    <p style={{ textAlign: 'center' }}> {`The Water with id:`} </p>
+                    <p style={{ textAlign: 'center', fontSize: 'large' }}> {`${data && data.id}`} </p>
+                    <p style={{ textAlign: 'center' }}> {`will be deleted`} </p>
                   </div>
                 </div>
               </Modal>

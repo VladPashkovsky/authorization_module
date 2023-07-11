@@ -33,10 +33,13 @@ const Login: FC = () => {
     const openNotification = (placement: NotificationPlacement) => {
       api.open({
         message: 'Notification:',
-        description: ` 
-          Sign in or Sign up as a new user.
+        description: `
+          Sign in 
           Email: admin@admin.com
-          Password: 123456789`,
+          Password: 123456789
+          
+          or Sign up as a new user.
+          `,
         placement: 'topLeft',
         className: 'custom-class',
         duration: 20,

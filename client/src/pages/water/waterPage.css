@@ -13,11 +13,15 @@
 }
 
 .buttons_container {
-    width: 300px;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    margin-left: 20px;
+    margin-right: 20px;
     background: lightgray;
 }
 
 .all_buttons {
-    margin-left: 40px;
+    /*margin-left: 40px;*/
     margin-top: 62px;
 }
