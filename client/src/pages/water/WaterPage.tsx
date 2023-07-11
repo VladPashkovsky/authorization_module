@@ -80,7 +80,9 @@ const WaterPage: FC = () => {
             <Descriptions.Item label='Image'>
               {<img src={data && data.imageUrl} alt='' style={{ height: '30vh' }} />}
             </Descriptions.Item>
-            <Descriptions.Item label='User'>{data && data.userId}</Descriptions.Item>
+            <Descriptions.Item label='User'>
+              NAME: {user && user.name} ID: {data && data.userId}
+            </Descriptions.Item>
           </Descriptions>
           <div className='buttons_container'>
             <div className='all_buttons'>

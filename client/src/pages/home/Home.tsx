@@ -25,10 +25,10 @@ import {useTransition, animated} from 'react-spring'
 
 const Home: FC = () => {
   const {data, isLoading} = useGetAllWatersQuery()
+  const {user} = useAppSelector(state => state.authReducer)
   const navigate = useNavigate()
   const location = useLocation()
   // const user = useAppSelector(selectUser)
-  const {user} = useAppSelector(state => state.authReducer)
 
 
   const transitions = useTransition(location, {
@@ -60,6 +60,9 @@ const Home: FC = () => {
   const defaultExpandable = { expandedRowRender: (record: Water) => <p>{record.description}</p> };
   const defaultTitle = () => 'Here is title';
   const defaultFooter = () => 'Here is footer';
+
+  console.log(user)
+
 
   type TablePaginationPosition =
     | 'topLeft'
@@ -118,7 +121,12 @@ const Home: FC = () => {
       title: 'USER',
       dataIndex: 'user',
       key: 'user',
-      width: '150px'
+      width: '150px',
+      render: () =>
+        <Space
+          style={{backgroundColor: '#1677ff', color: 'white', fontWeight: 'lighter', padding: '5px'}}>
+          {user && user.name}
+        </Space>
     },
     {
       title: 'Action',
